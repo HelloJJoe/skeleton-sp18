@@ -33,28 +33,28 @@ public class ArrayDeque<T>{
 
 
     public void addFirst(T item){
-        if(size == items.length){
-            int newAListElementNum = size * 3;
-            T[] newAList = (T []) new Object[newAListElementNum];
-            // copy all of addFirst element to newAList
-            int counter = 0;
-            int addFirstNum;
-            if(nextFirst > elementNum / 2){
-                addFirstNum = elementNum / 2 - nextFirst;
-            }else{
-                addFirstNum = elementNum / 2 - (nextFirst - elementNum);
-            }
-            while(counter < addFirstNum){
-                int oldAListFirstPos = elementNum / 2 - counter;
-                if(oldAListFirstPos < 0){
-                    oldAListFirstPos += elementNum;
-                }
-                newAList[newAListElementNum / 2 - counter] = items[oldAListFirstPos];
-                counter++;
-            }
-            items = newAList;
-            nextFirst = newAListElementNum / 2 - addFirstNum;
-        }
+//        if(size == items.length){
+//            int newAListElementNum = size * 3;
+//            T[] newAList = (T []) new Object[newAListElementNum];
+//            // copy all of addFirst element to newAList
+//            int counter = 0;
+//            int addFirstNum;
+//            if(nextFirst > elementNum / 2){
+//                addFirstNum = elementNum / 2 - nextFirst;
+//            }else{
+//                addFirstNum = elementNum / 2 - (nextFirst - elementNum);
+//            }
+//            while(counter < addFirstNum){
+//                int oldAListFirstPos = elementNum / 2 - counter;
+//                if(oldAListFirstPos < 0){
+//                    oldAListFirstPos += elementNum;
+//                }
+//                newAList[newAListElementNum / 2 - counter] = items[oldAListFirstPos];
+//                counter++;
+//            }
+//            items = newAList;
+//            nextFirst = newAListElementNum / 2 - addFirstNum;
+//        }
         items[nextFirst] = item;
         nextFirst--;
         calPosition();
@@ -62,30 +62,30 @@ public class ArrayDeque<T>{
     }
 
     public void addLast(T item){
-        if(size == items.length){
-            int newAListElementNum = size * 3;
-            T[] newAList = (T []) new Object[newAListElementNum];
-
-            // copy all of the addLast element to newAList
-            int counter = 0;
-            int addLastNum;
-            int oldAListLastPos;
-            if(nextLast > elementNum / 2 + 1){
-                addLastNum = nextLast - elementNum / 2 + 1;
-            }else{
-                addLastNum = nextLast + elementNum - (elementNum / 2 + 1);
-            }
-            while(counter < addLastNum){
-                oldAListLastPos = (elementNum / 2 + 1) + counter;
-                if(oldAListLastPos > elementNum - 1){
-                    oldAListLastPos -= elementNum;
-                }
-                newAList[newAListElementNum / 2 + 1 + counter] = items[oldAListLastPos];
-                counter++;
-            }
-            items = newAList;
-            nextLast = newAListElementNum / 2 + 1 + addLastNum;
-        }
+//        if(size == items.length){
+//            int newAListElementNum = size * 3;
+//            T[] newAList = (T []) new Object[newAListElementNum];
+//
+//            // copy all of the addLast element to newAList
+//            int counter = 0;
+//            int addLastNum;
+//            int oldAListLastPos;
+//            if(nextLast > elementNum / 2 + 1){
+//                addLastNum = nextLast - elementNum / 2 + 1;
+//            }else{
+//                addLastNum = nextLast + elementNum - (elementNum / 2 + 1);
+//            }
+//            while(counter < addLastNum){
+//                oldAListLastPos = (elementNum / 2 + 1) + counter;
+//                if(oldAListLastPos > elementNum - 1){
+//                    oldAListLastPos -= elementNum;
+//                }
+//                newAList[newAListElementNum / 2 + 1 + counter] = items[oldAListLastPos];
+//                counter++;
+//            }
+//            items = newAList;
+//            nextLast = newAListElementNum / 2 + 1 + addLastNum;
+//        }
         items[nextLast] = item;
         nextLast++;
         calPosition();
