@@ -70,7 +70,7 @@ public class ArrayDeque<T>{
 
 
     public T removeFirst(){
-
+        
         if(nextFirst == 7){
             nextFirst -= 8;
         }
@@ -106,17 +106,32 @@ public class ArrayDeque<T>{
         ArrayDeque<String> L = new ArrayDeque<>();
         L.addFirst("1");
         L.addFirst("-1");
-        L.addLast("2");
-        L.addLast("3");
-        L.addLast("4");
-        L.addLast("5");
-        L.addLast("6");
-        L.addLast("7");
-        L.addLast("8");
+        L.removeFirst();
+        L.removeFirst();
+        L.removeFirst();
+
+
+//        L.addLast("2");
 
         L.printDeque();
-        System.out.println(L.size);
+        System.out.println("size = " + L.size + " ,nextFirst = " + L.nextFirst + " ,nextLast = " + L.nextLast + "\n");
+
+
+
+//        L.addLast("4");
+//        L.addLast("5");
+//        L.addLast("6");
+//        L.addLast("7");
+//        L.addLast("8");
 //        L.removeFirst();
+//        L.printDeque();
+//        System.out.println("size = " + L.size + " ,nextFirst = " + L.nextFirst + " ,nextLast = " + L.nextLast + "\n");
+//
+//        L.addFirst("3");
+//        L.printDeque();
+//        System.out.println("size = " + L.size + " ,nextFirst = " + L.nextFirst + " ,nextLast = " + L.nextLast + "\n");
+
+
 //        L.printDeque();
 
     }
