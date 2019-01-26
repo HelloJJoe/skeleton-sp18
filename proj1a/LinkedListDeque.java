@@ -69,7 +69,7 @@ public class LinkedListDeque<T>{
     }
 
     public T removeFirst(){
-        if(sentinel.next == null){
+        if(sentinel.next == null || sentinel == sentinel){
             return null;
         }
         StuffNode first = sentinel.next;
@@ -80,7 +80,7 @@ public class LinkedListDeque<T>{
     }
 
     public T removeLast(){
-        if(sentinel.prev == null){
+        if(sentinel.prev == null || sentinel == sentinel){
             return null;
         }
         StuffNode last = sentinel.prev;
@@ -89,6 +89,7 @@ public class LinkedListDeque<T>{
         size -= 1;
         return last.item;
     }
+
     public T get(int index){
         int counter = 0;
         StuffNode L = sentinel.next;
@@ -103,15 +104,15 @@ public class LinkedListDeque<T>{
     }
 
     public T getRecursive(int index){
-        return getRecursive(sentinel, index);
+        return getRecursive(sentinel.next, index);
 
     }
 
-    private T getRecursive(StuffNode sentinel, int index){
+    private T getRecursive(StuffNode stuffnode, int index){
         if(index == 0){
-            return sentinel.item;
+            return stuffnode.item;
         }
-        return getRecursive(sentinel.next, (index - 1));
+        return getRecursive(stuffnode.next, (index - 1));
     }
 
 
@@ -120,18 +121,25 @@ public class LinkedListDeque<T>{
     public static void main(String[] args){
 
         LinkedListDeque<String> L = new LinkedListDeque<>();
-        System.out.println(L.isEmpty());
+        System.out.println(L.removeFirst());
+        System.out.println(L.removeLast());
+
         L.addFirst("-1");
         L.addFirst("-2");
         L.addLast("1");
         L.addFirst("-3");
-        System.out.println(L.getRecursive(5));
+        L.printDeque();
+        System.out.println(L.getRecursive(0));
+        System.out.println(L.getRecursive(1));
+        System.out.println(L.getRecursive(2));
+        System.out.println(L.getRecursive(3));
+        System.out.println(L.getRecursive(4));
+
+
+
+
 //        System.out.println(L.isEmpty());
 //        System.out.println(L.size());
-        L.printDeque();
-        L.removeLast();
-        L.printDeque();
-        System.out.println(L.isEmpty());
 
     }
 }
