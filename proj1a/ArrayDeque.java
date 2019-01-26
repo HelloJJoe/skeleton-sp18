@@ -38,13 +38,13 @@ public class ArrayDeque<T>{
             T[] newAList = (T []) new Object[newAListElementNum];
             // copy all of addFirst element to newAList
             int counter = 0;
-            int numAddFirstNum;
+            int addFirstNum;
             if(nextFirst > elementNum / 2){
-                numAddFirstNum = elementNum / 2 - nextFirst;
+                addFirstNum = elementNum / 2 - nextFirst;
             }else{
-                numAddFirstNum = elementNum / 2 - (nextFirst - elementNum);
+                addFirstNum = elementNum / 2 - (nextFirst - elementNum);
             }
-            while(counter < numAddFirstNum){
+            while(counter < addFirstNum){
                 int oldAListFirstPos = elementNum / 2 - counter;
                 if(oldAListFirstPos < 0){
                     oldAListFirstPos += elementNum;
@@ -53,7 +53,7 @@ public class ArrayDeque<T>{
                 counter++;
             }
             items = newAList;
-            nextFirst = newAListElementNum / 2 - numAddFirstNum;
+            nextFirst = newAListElementNum / 2 - addFirstNum;
         }
         items[nextFirst] = item;
         nextFirst--;
