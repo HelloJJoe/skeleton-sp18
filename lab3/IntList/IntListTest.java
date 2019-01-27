@@ -70,4 +70,9 @@ public class IntListTest {
       * to add a main method. See ArithmeticTest.java for an
       * example. */
 
+    @Test
+    public IntList testReverse(){
+
+    }
+
 }

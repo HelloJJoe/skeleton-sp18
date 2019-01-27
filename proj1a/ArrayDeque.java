@@ -4,57 +4,50 @@ public class ArrayDeque<T>{
     private int size;
     private int nextFirst;
     private int nextLast;
-    private int elementNum;
+    private int oldElementNum;
 
     public ArrayDeque(){
-        elementNum = 8;
-        items = (T []) new Object[elementNum];
+        oldElementNum = 8;
+        items = (T []) new Object[oldElementNum];
         size = 0;
-        nextFirst = elementNum / 2;
-        nextLast = (elementNum / 2) + 1;
+        nextFirst = oldElementNum / 2;
+        nextLast = (oldElementNum / 2) + 1;
+    }
+
+    private int newElementNum(){
+        return items.length;
+    }
+    private int getOldElementNum(){
+        return oldElementNum;
     }
 
     private void calPosition(){
-        if(nextFirst < 0){
-            nextFirst = elementNum - 1;
+        if(nextFirst < newElementNum() - getOldElementNum()){
+            nextFirst = newElementNum() - 1;
         }
-        if(nextLast > elementNum - 1){
-            nextLast = 0;
+        if(nextLast > newElementNum() - 1){
+            nextLast = newElementNum() - getOldElementNum();
         }
-
+    }
+    private void reSetAllProperties(int capacity){
+        oldElementNum = items.length;
+        nextFirst = oldElementNum + (capacity - newElementNum()) / 2;
+        nextLast = oldElementNum + (capacity - newElementNum()) / 2 + 1;
     }
 
-//    private void resize(int capacity){
-//        T[] newAList = (T []) new Object[capacity];
-//        System.arraycopy(items, 0, newAList, 0, size);
-//        items = newAList;
-//
-//    }
+    /** Resize the ArrayDeque */
+    private void resize(int capacity){
+        T[] newAList = (T []) new Object[capacity];
+        System.arraycopy(items, 0, newAList, 0, size());
+        reSetAllProperties(capacity);
+        items = newAList;
+    }
 
 
     public void addFirst(T item){
-//        if(size == items.length){
-//            int newAListElementNum = size * 3;
-//            T[] newAList = (T []) new Object[newAListElementNum];
-//            // copy all of addFirst element to newAList
-//            int counter = 0;
-//            int addFirstNum;
-//            if(nextFirst > elementNum / 2){
-//                addFirstNum = elementNum / 2 - nextFirst;
-//            }else{
-//                addFirstNum = elementNum / 2 - (nextFirst - elementNum);
-//            }
-//            while(counter < addFirstNum){
-//                int oldAListFirstPos = elementNum / 2 - counter;
-//                if(oldAListFirstPos < 0){
-//                    oldAListFirstPos += elementNum;
-//                }
-//                newAList[newAListElementNum / 2 - counter] = items[oldAListFirstPos];
-//                counter++;
-//            }
-//            items = newAList;
-//            nextFirst = newAListElementNum / 2 - addFirstNum;
-//        }
+        if(size == newElementNum()){
+            resize(size() * 2);
+        }
         items[nextFirst] = item;
         nextFirst--;
         calPosition();
@@ -62,30 +55,9 @@ public class ArrayDeque<T>{
     }
 
     public void addLast(T item){
-//        if(size == items.length){
-//            int newAListElementNum = size * 3;
-//            T[] newAList = (T []) new Object[newAListElementNum];
-//
-//            // copy all of the addLast element to newAList
-//            int counter = 0;
-//            int addLastNum;
-//            int oldAListLastPos;
-//            if(nextLast > elementNum / 2 + 1){
-//                addLastNum = nextLast - elementNum / 2 + 1;
-//            }else{
-//                addLastNum = nextLast + elementNum - (elementNum / 2 + 1);
-//            }
-//            while(counter < addLastNum){
-//                oldAListLastPos = (elementNum / 2 + 1) + counter;
-//                if(oldAListLastPos > elementNum - 1){
-//                    oldAListLastPos -= elementNum;
-//                }
-//                newAList[newAListElementNum / 2 + 1 + counter] = items[oldAListLastPos];
-//                counter++;
-//            }
-//            items = newAList;
-//            nextLast = newAListElementNum / 2 + 1 + addLastNum;
-//        }
+        if(size == newElementNum()){
+            resize(size() * 2);
+        }
         items[nextLast] = item;
         nextLast++;
         calPosition();
@@ -144,7 +116,7 @@ public class ArrayDeque<T>{
     }
 
     public T get(int index){
-        if(items[index] == null){
+        if(index >= size){
             return null;
         }
         return items[index];
@@ -153,59 +125,57 @@ public class ArrayDeque<T>{
 
 
     public static void main(String[] args){
-        ArrayDeque<String> L = new ArrayDeque<>();
-        L.addLast("1");
-        L.addLast("2");
-        L.addLast("3");
-        L.addLast("4");
-        L.addLast("5");
-        L.addLast("6");
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+        L.addLast(1);
+        L.addLast(2);
+        L.addLast(3);
+        L.addLast(4);
+        L.addLast(5);
+        L.addLast(6);
+        L.addLast(7);
+        L.addLast(8);
+        L.addLast(9);
+        L.addLast(10);
+        L.addLast(11);
+        L.addLast(12);
+        L.addLast(13);
+        L.addLast(14);
+        L.addLast(15);
+        L.addLast(16);
+        L.addLast(17);
+        L.addLast(18);
 
-        L.addLast("7");
-        L.addLast("8");
 
+//
+//        L.addFirst(1);
+//        L.addFirst(2);
+//        L.addFirst(3);
+//        L.addFirst(4);
+//        L.addFirst(5);
+//        L.addFirst(6);
+//        L.addFirst(7);
+//        L.addFirst(8);
 
-//        L.addFirst("0");
-//        L.addFirst("-1");
-//        L.addFirst("-2");
-//        L.addFirst("-3");
-//        L.addFirst("-4");
-//        L.addFirst("-5");
-//        L.addFirst("-6");
         L.printDeque();
         System.out.println("size = " + L.size() + " ,nextFirst = " + L.nextFirst + " ,nextLast = " + L.nextLast + "\n");
-//
-        L.addLast("9");
-
-////        L.addLast("2");
-
-        L.printDeque();
-        System.out.println("size = " + L.size() + " ,nextFirst = " + L.nextFirst + " ,nextLast = " + L.nextLast + "\n");
-//
-//
-//
-//
-
-//        L.addFirst("-6");
-//
-//        L.addLast("4");
-//        L.addLast("5");
-
-//        System.out.println(L.removeLast());
-//        L.removeLast();
-//        L.addLast("6");
-//        L.addLast("7");
-//        L.addLast("8");
-//        L.removeFirst();
-//        L.printDeque();
-//        System.out.println("size = " + L.size() + " ,nextFirst = " + L.nextFirst + " ,nextLast = " + L.nextLast + "\n");
-//////
-
-//        L.printDeque();
-//        System.out.println("size = " + L.size + " ,nextFirst = " + L.nextFirst + " ,nextLast = " + L.nextLast + "\n");
+        L.addFirst(9);
+        L.addFirst(10);
+        L.addFirst(11);
+        L.addFirst(12);
+        L.addFirst(13);
+        L.addFirst(14);
+        L.addFirst(15);
+        L.addFirst(16);
+        L.addFirst(17);
+        L.addFirst(18);
 
 
-//        L.printDeque();
+
+
+
+
+
+
 
     }
 
