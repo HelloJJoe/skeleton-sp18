@@ -7,14 +7,14 @@ public class ArrayDeque<T>{
     private int oldElementNum;
 
     public ArrayDeque(){
-        oldElementNum = 8;
-        items = (T []) new Object[oldElementNum];
+        items = (T []) new Object[8];
         size = 0;
-        nextFirst = oldElementNum / 2;
-        nextLast = (oldElementNum / 2) + 1;
+        nextFirst = 7;
+        nextLast = 0;
+        oldElementNum = 8;
     }
 
-    private int newElementNum(){
+    private int ElementNum(){
         return items.length;
     }
     private int getOldElementNum(){
@@ -22,46 +22,63 @@ public class ArrayDeque<T>{
     }
 
     private void calPosition(){
-        if(nextFirst < newElementNum() - getOldElementNum()){
-            nextFirst = newElementNum() - 1;
+        if(nextFirst < ElementNum() - getOldElementNum()){
+            nextFirst = ElementNum() - 1;
         }
-        if(nextLast > newElementNum() - 1){
-            nextLast = newElementNum() - getOldElementNum();
+        if(nextLast > ElementNum() - 1){
+            nextLast = ElementNum() - getOldElementNum();
         }
     }
     private void reSetAllProperties(int capacity){
         oldElementNum = items.length;
-        nextFirst = oldElementNum + (capacity - newElementNum()) / 2;
-        nextLast = oldElementNum + (capacity - newElementNum()) / 2 + 1;
+        nextFirst = capacity - 1;
+        nextLast = getOldElementNum();
     }
 
     /** Resize the ArrayDeque */
     private void resize(int capacity){
         T[] newAList = (T []) new Object[capacity];
-        System.arraycopy(items, 0, newAList, 0, size());
+        /** copy the old items element to newAlist **/
+
+        // index of newAList
+        int j = 0;
+        int i = nextLast % ElementNum();
+        int counter = 0;
+        while(counter < ElementNum()){
+            newAList[j] = items[i];
+            j++;
+            i++;
+            counter++;
+            if(i == ElementNum()){
+                i = 0;
+            }
+        }
         reSetAllProperties(capacity);
         items = newAList;
     }
 
 
     public void addFirst(T item){
-        if(size == newElementNum()){
-            resize(size() * 2);
-        }
         items[nextFirst] = item;
+        size++;
         nextFirst--;
         calPosition();
-        size++;
+        if(size() == ElementNum()){
+            resize(size() * 2);
+            return;
+        }
     }
 
     public void addLast(T item){
-        if(size == newElementNum()){
-            resize(size() * 2);
-        }
         items[nextLast] = item;
+        size++;
         nextLast++;
         calPosition();
-        size++;
+        if(size() == ElementNum()){
+            resize(size() * 2);
+            return;
+        }
+
     }
 
     public boolean isEmpty(){
@@ -81,7 +98,6 @@ public class ArrayDeque<T>{
         }
         System.out.println();
     }
-
 
 
     public T removeFirst(){
@@ -129,6 +145,8 @@ public class ArrayDeque<T>{
         L.addLast(1);
         L.addLast(2);
         L.addLast(3);
+        L.addFirst(100);
+        L.addFirst(101);
         L.addLast(4);
         L.addLast(5);
         L.addLast(6);
@@ -137,28 +155,27 @@ public class ArrayDeque<T>{
         L.addLast(9);
         L.addLast(10);
         L.addLast(11);
-        L.addLast(12);
-        L.addLast(13);
-        L.addLast(14);
-        L.addLast(15);
-        L.addLast(16);
-        L.addLast(17);
-        L.addLast(18);
+//        L.addLast(12);
+//        L.addLast(13);
+//        L.addLast(14);
+//        L.addLast(15);
+//        L.addLast(16);
+//        L.addLast(17);
+//        L.addLast(18);
 
 
 //
-//        L.addFirst(1);
-//        L.addFirst(2);
-//        L.addFirst(3);
-//        L.addFirst(4);
-//        L.addFirst(5);
-//        L.addFirst(6);
-//        L.addFirst(7);
-//        L.addFirst(8);
-
-        L.printDeque();
-        System.out.println("size = " + L.size() + " ,nextFirst = " + L.nextFirst + " ,nextLast = " + L.nextLast + "\n");
+        L.addFirst(1);
+        L.addFirst(2);
+        L.addFirst(3);
+        L.addFirst(4);
+        L.addFirst(5);
+        L.addFirst(6);
+        L.addFirst(7);
+        L.addFirst(8);
         L.addFirst(9);
+
+
         L.addFirst(10);
         L.addFirst(11);
         L.addFirst(12);
