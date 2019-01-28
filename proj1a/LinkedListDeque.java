@@ -121,25 +121,7 @@ public class LinkedListDeque<T>{
     public static void main(String[] args){
 
         LinkedListDeque<String> L = new LinkedListDeque<>();
-        System.out.println(L.removeFirst());
-        System.out.println(L.removeLast());
 
-        L.addFirst("-1");
-        L.addFirst("-2");
-        L.addLast("1");
-        L.addFirst("-3");
-        L.printDeque();
-        System.out.println(L.getRecursive(0));
-        System.out.println(L.getRecursive(1));
-        System.out.println(L.getRecursive(2));
-        System.out.println(L.getRecursive(3));
-        System.out.println(L.getRecursive(4));
-
-
-
-
-//        System.out.println(L.isEmpty());
-//        System.out.println(L.size());
 
     }
 }

@@ -111,12 +111,16 @@ public class ArrayDeque<T>{
         items[nextFirst + 1] = null;
         size--;
         nextFirst++;
+        if(size() == 0){
+            nextFirst = ElementNum();
+            nextLast = 0;
+        }
         calPosition();
         return first;
     }
 
     public T removeLast(){
-        if(size == 0){
+        if(size() == 0){
             return null;
         }
         if(nextLast == 0){
@@ -126,6 +130,10 @@ public class ArrayDeque<T>{
         items[nextLast - 1] = null;
         size--;
         nextLast--;
+        if(size() == 0){
+            nextFirst = ElementNum();
+            nextLast = 0;
+        }
         calPosition();
         return last;
     }
@@ -158,6 +166,15 @@ public class ArrayDeque<T>{
         L.removeFirst();
         L.removeFirst();
         L.removeFirst();
+
+        L.addLast(6);
+        L.addLast(7);
+        L.addLast(8);
+        L.addLast(9);
+        L.addLast(10);
+        L.addLast(11);
+
+
         L.removeFirst();
         L.removeFirst();
         L.removeLast();
@@ -197,6 +214,8 @@ public class ArrayDeque<T>{
         L.addFirst(13);
         L.addFirst(14);
         L.addFirst(15);
+        L.printDeque();
+        System.out.println(L.get(1));
         L.addFirst(16);
         L.addFirst(17);
         L.addFirst(18);
