@@ -112,7 +112,7 @@ public class ArrayDeque<T>{
         size--;
         nextFirst++;
         if(size() == 0){
-            nextFirst = ElementNum();
+            nextFirst = ElementNum() - 1;
             nextLast = 0;
         }
         calPosition();
@@ -131,7 +131,7 @@ public class ArrayDeque<T>{
         size--;
         nextLast--;
         if(size() == 0){
-            nextFirst = ElementNum();
+            nextFirst = ElementNum() - 1;
             nextLast = 0;
         }
         calPosition();
@@ -151,29 +151,45 @@ public class ArrayDeque<T>{
 
     public static void main(String[] args){
         ArrayDeque<Integer> L = new ArrayDeque<>();
+        L.addFirst(0);
+        L.removeFirst();
+        L.isEmpty();
+        L.isEmpty();
+        L.addFirst(4);
+
         L.addLast(1);
         L.addLast(2);
         L.addLast(3);
-        L.addFirst(100);
-        L.addFirst(101);
+//        L.addFirst(100);
+//        L.addFirst(101);
         L.addLast(4);
 //        L.removeLast();
 //        L.removeLast();
-        L.removeFirst();
-        L.removeFirst();
-        L.removeFirst();
-        L.removeFirst();
-        L.removeFirst();
-        L.removeFirst();
-        L.removeFirst();
+//        L.removeFirst();
+//        L.removeFirst();
+//        L.removeFirst();
+//        L.removeFirst();
+//        L.removeFirst();
+//        System.out.println(L.isEmpty());
+//
+//        L.removeFirst();
+//        System.out.println(L.isEmpty());
+//        System.out.println(L.isEmpty());
+//
+//        L.removeFirst();
+        L.addLast(5);
 
         L.addLast(6);
         L.addLast(7);
+        System.out.println(L.get(0));
+        L.printDeque();
         L.addLast(8);
+        System.out.println(L.get(0));
+        L.printDeque();
         L.addLast(9);
         L.addLast(10);
         L.addLast(11);
-
+//        System.out.println(Math.floorMod(-1, 8));
 
         L.removeFirst();
         L.removeFirst();
