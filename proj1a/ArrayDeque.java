@@ -101,11 +101,11 @@ public class ArrayDeque<T>{
 
 
     public T removeFirst(){
-        if(size == 0 || nextFirst == 0){
+        if(size == 0){
             return null;
         }
-        if(nextFirst == 7){
-            nextFirst -= 8;
+        if(nextFirst == ElementNum() - 1){
+            nextFirst -= ElementNum();
         }
         T first = items[nextFirst + 1];
         items[nextFirst + 1] = null;
@@ -116,10 +116,9 @@ public class ArrayDeque<T>{
     }
 
     public T removeLast(){
-        if(size == 0 || nextLast == 1){
+        if(size == 0){
             return null;
         }
-
         if(nextLast == 0){
             nextLast += 8;
         }
@@ -133,6 +132,8 @@ public class ArrayDeque<T>{
 
     public T get(int index){
         if(index >= size){
+            return null;
+        }else if(items[index] == null){
             return null;
         }
         return items[index];
@@ -148,7 +149,21 @@ public class ArrayDeque<T>{
         L.addFirst(100);
         L.addFirst(101);
         L.addLast(4);
-        L.addLast(5);
+//        L.removeLast();
+//        L.removeLast();
+        L.removeFirst();
+        L.removeFirst();
+        L.removeFirst();
+        L.removeFirst();
+        L.removeFirst();
+        L.removeFirst();
+        L.removeFirst();
+        L.removeFirst();
+        L.removeFirst();
+        L.removeLast();
+        L.removeLast();
+        L.removeLast();
+
         L.addLast(6);
         L.addLast(7);
         L.addLast(8);
