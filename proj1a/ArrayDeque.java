@@ -62,23 +62,22 @@ public class ArrayDeque<T>{
         items[nextFirst] = item;
         size++;
         nextFirst--;
-        calPosition();
         if(size() == ElementNum()){
             resize(size() * 2);
             return;
         }
+        calPosition();
     }
 
     public void addLast(T item){
         items[nextLast] = item;
         size++;
         nextLast++;
-        calPosition();
         if(size() == ElementNum()){
             resize(size() * 2);
             return;
         }
-
+        calPosition();
     }
 
     public boolean isEmpty(){
@@ -145,108 +144,24 @@ public class ArrayDeque<T>{
         return items[Math.floorMod(nextFirst + 1 + index, ElementNum())];
     }
 
-
-
     public static void main(String[] args){
         ArrayDeque<Integer> L = new ArrayDeque<>();
 
-
         L.addFirst(0);
-        L.addFirst(1);
-        L.removeLast();//     ==> 0
-        L.removeFirst();//   ==> 1
-        L.addFirst(4);
-        System.out.println(L.get(0));
-
-        L.addFirst(0);
-        L.removeFirst();
-        L.isEmpty();
-        L.isEmpty();
-        L.addFirst(4);
-
-        L.addLast(1);
-        L.addLast(2);
-        L.addLast(3);
-//        L.addFirst(100);
-//        L.addFirst(101);
-        L.addLast(4);
-//        L.removeLast();
-//        L.removeLast();
-//        L.removeFirst();
-//        L.removeFirst();
-//        L.removeFirst();
-//        L.removeFirst();
-//        L.removeFirst();
-//        System.out.println(L.isEmpty());
-//
-//        L.removeFirst();
-//        System.out.println(L.isEmpty());
-//        System.out.println(L.isEmpty());
-//
-//        L.removeFirst();
-        L.addLast(5);
-
-        L.addLast(6);
-        L.addLast(7);
-        System.out.println(L.get(0));
-        L.printDeque();
-        L.addLast(8);
-        System.out.println(L.get(0));
-        L.printDeque();
-        L.addLast(9);
-        L.addLast(10);
-        L.addLast(11);
-//        System.out.println(Math.floorMod(-1, 8));
-
-        L.removeFirst();
-        L.removeFirst();
-        L.removeLast();
-        L.removeLast();
-        L.removeLast();
-
-        L.addLast(6);
-        L.addLast(7);
-        L.addLast(8);
-        L.addLast(9);
-        L.addLast(10);
-        L.addLast(11);
-//        L.addLast(12);
-//        L.addLast(13);
-//        L.addLast(14);
-//        L.addLast(15);
-//        L.addLast(16);
-//        L.addLast(17);
-//        L.addLast(18);
-
-
-//
         L.addFirst(1);
         L.addFirst(2);
         L.addFirst(3);
         L.addFirst(4);
-        L.addFirst(5);
-        L.addFirst(6);
-        L.addFirst(7);
-        L.addFirst(8);
-        L.addFirst(9);
+        L.removeLast();
+        L.removeLast();
 
-
-        L.addFirst(10);
-        L.addFirst(11);
-        L.addFirst(12);
-        L.addFirst(13);
-        L.addFirst(14);
-        L.addFirst(15);
-        L.printDeque();
+        L.removeLast();
+        L.removeLast();
+        L.addLast(5);
+        System.out.println(L.get(0));
         System.out.println(L.get(1));
-        L.addFirst(16);
-        L.addFirst(17);
-        L.addFirst(18);
-
-
-
-
-
+        System.out.println(L.get(2));
+        System.out.println(L.get(3));
 
 
 
