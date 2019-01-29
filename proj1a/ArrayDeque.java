@@ -141,16 +141,23 @@ public class ArrayDeque<T>{
     public T get(int index){
         if(index >= size){
             return null;
-        }else if(items[index] == null){
-            return null;
         }
-        return items[index];
+        return items[Math.floorMod(nextFirst + 1 + index, ElementNum())];
     }
 
 
 
     public static void main(String[] args){
         ArrayDeque<Integer> L = new ArrayDeque<>();
+
+
+        L.addFirst(0);
+        L.addFirst(1);
+        L.removeLast();//     ==> 0
+        L.removeFirst();//   ==> 1
+        L.addFirst(4);
+        System.out.println(L.get(0));
+
         L.addFirst(0);
         L.removeFirst();
         L.isEmpty();
