@@ -71,4 +71,32 @@ public class ArrayDequeTest{
 
     }
 
+    @Test
+    public void testRandom5(){
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addFirst(0);
+        A.removeFirst();
+        A.addFirst(2);
+        assertEquals(2, (Object) A.removeFirst());
+    }
+
+    @Test
+    public void testRandom6(){
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addFirst(0);
+        A.removeLast();
+        A.addFirst(2);
+        assertEquals(2, (Object) A.removeLast());
+    }
+
+    @Test
+    public void testRandom7(){
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addFirst(0);
+        A.removeFirst();
+        A.addFirst(2);
+        assertEquals(2, (Object) A.removeFirst());
+    }
+
+
 }

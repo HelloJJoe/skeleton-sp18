@@ -95,7 +95,7 @@ public class ArrayDeque<T>{
             nextFirst = ElementNum() - 1;
             nextLast = 0;
         }
-        if((float)size() / ElementNum() < 0.25){
+        if(ElementNum() > 8 && (float)size() / ElementNum() < 0.25){
             resize(ElementNum() / 2);
         }
         return first;
@@ -116,7 +116,7 @@ public class ArrayDeque<T>{
             nextFirst = ElementNum() - 1;
             nextLast = 0;
         }
-        if((float) size() / ElementNum() < 0.25){
+        if(ElementNum() > 8 && (float) size() / ElementNum() < 0.25){
             resize(ElementNum() / 2);
         }
         return last;
