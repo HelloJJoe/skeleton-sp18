@@ -1,3 +1,4 @@
+
 public class ArrayDeque<T>{
 
     public T[] items;
@@ -21,21 +22,13 @@ public class ArrayDeque<T>{
         return oldElementNum;
     }
 
-    private void calPosition(){
-        if(nextFirst < ElementNum() - getOldElementNum()){
-            nextFirst = ElementNum() - 1;
-        }
-        if(nextLast > ElementNum() - 1){
-            nextLast = ElementNum() - getOldElementNum();
-        }
-    }
     private void reSetAllProperties(int capacity){
         oldElementNum = items.length;
         nextFirst = capacity - 1;
         nextLast = getOldElementNum();
     }
 
-    /** Resize the ArrayDeque */
+    /** Resize the A */
     private void resize(int capacity){
         T[] newAList = (T []) new Object[capacity];
         /** copy the old items element to newAlist **/
@@ -49,9 +42,7 @@ public class ArrayDeque<T>{
             j++;
             i++;
             counter++;
-            if(i == ElementNum()){
-                i = 0;
-            }
+            i = Math.floorMod(i, ElementNum());
         }
         reSetAllProperties(capacity);
         items = newAList;
@@ -61,24 +52,25 @@ public class ArrayDeque<T>{
     public void addFirst(T item){
         items[nextFirst] = item;
         size++;
-        nextFirst--;
+        nextFirst = minusOne(nextFirst);
         if(size() == ElementNum()){
             resize(size() * 2);
             return;
         }
-        calPosition();
     }
+
+
 
     public void addLast(T item){
         items[nextLast] = item;
         size++;
-        nextLast++;
+        nextLast = plusOne(nextLast);
         if(size() == ElementNum()){
             resize(size() * 2);
             return;
         }
-        calPosition();
     }
+
 
     public boolean isEmpty(){
         if(size == 0){
@@ -114,7 +106,6 @@ public class ArrayDeque<T>{
             nextFirst = ElementNum() - 1;
             nextLast = 0;
         }
-        calPosition();
         return first;
     }
 
@@ -133,7 +124,6 @@ public class ArrayDeque<T>{
             nextFirst = ElementNum() - 1;
             nextLast = 0;
         }
-        calPosition();
         return last;
     }
 
@@ -142,6 +132,15 @@ public class ArrayDeque<T>{
             return null;
         }
         return items[Math.floorMod(nextFirst + 1 + index, ElementNum())];
+    }
+
+
+    private int minusOne(int x){
+        return Math.floorMod(x - 1, ElementNum());
+    }
+
+    private int plusOne(int x){
+        return Math.floorMod(x + 1, ElementNum());
     }
 
     public static void main(String[] args){
