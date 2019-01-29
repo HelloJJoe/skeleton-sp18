@@ -5,27 +5,16 @@ public class ArrayDeque<T>{
     private int size;
     private int nextFirst;
     private int nextLast;
-    private int oldElementNum;
 
     public ArrayDeque(){
         items = (T []) new Object[8];
         size = 0;
         nextFirst = 7;
         nextLast = 0;
-        oldElementNum = 8;
     }
 
     private int ElementNum(){
         return items.length;
-    }
-    private int getOldElementNum(){
-        return oldElementNum;
-    }
-
-    private void reSetAllProperties(int capacity){
-        oldElementNum = items.length;
-        nextFirst = capacity - 1;
-        nextLast = getOldElementNum();
     }
 
     /** Resize the A */
@@ -35,16 +24,16 @@ public class ArrayDeque<T>{
 
         // index of newAList
         int j = 0;
-        int i = nextLast % ElementNum();
+        int i = plusOne(nextFirst);
         int counter = 0;
-        while(counter < ElementNum()){
+        while(counter < size()){
             newAList[j] = items[i];
             j++;
-            i++;
+            i = plusOne(i);
             counter++;
-            i = Math.floorMod(i, ElementNum());
         }
-        reSetAllProperties(capacity);
+        nextLast = j;
+        nextFirst = capacity - 1;
         items = newAList;
     }
 
@@ -106,6 +95,9 @@ public class ArrayDeque<T>{
             nextFirst = ElementNum() - 1;
             nextLast = 0;
         }
+        if((float)size() / ElementNum() < 0.25){
+            resize(ElementNum() / 2);
+        }
         return first;
     }
 
@@ -123,6 +115,9 @@ public class ArrayDeque<T>{
         if(size() == 0){
             nextFirst = ElementNum() - 1;
             nextLast = 0;
+        }
+        if((float) size() / ElementNum() < 0.25){
+            resize(ElementNum() / 2);
         }
         return last;
     }
@@ -144,24 +139,16 @@ public class ArrayDeque<T>{
     }
 
     public static void main(String[] args){
-        ArrayDeque<Integer> L = new ArrayDeque<>();
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addFirst(4);
+        System.out.println((float) (A.size()/32));
 
-        L.addFirst(0);
-        L.addFirst(1);
-        L.addFirst(2);
-        L.addFirst(3);
-        L.addFirst(4);
-        L.removeLast();
-        L.removeLast();
-
-        L.removeLast();
-        L.removeLast();
-        L.addLast(5);
-        System.out.println(L.get(0));
-        System.out.println(L.get(1));
-        System.out.println(L.get(2));
-        System.out.println(L.get(3));
-
+//        for(int i = 0; i < 16; i++){
+//            A.addFirst(i);
+//        }
+//        for(int i = 0; i < 14; i++){
+//            A.removeFirst();
+//        }
 
 
 

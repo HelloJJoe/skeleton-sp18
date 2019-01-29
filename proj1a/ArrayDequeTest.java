@@ -58,6 +58,17 @@ public class ArrayDequeTest{
         A.get(7);
         assertEquals(9, (Object) A.get(7));
     }
+    @Test
+    public void testResize(){
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        for(int i = 0; i < 16; i++){
+            A.addFirst(i);
+        }
+        for(int i = 0; i < 14; i++){
+            A.removeFirst();
+        }
+        assertEquals(1, (Object) A.get(0));
 
+    }
 
 }
