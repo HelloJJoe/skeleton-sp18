@@ -2,9 +2,9 @@ public class LinkedListDeque<T> {
 
     private class StuffNode {
 
-        public T item;
-        public StuffNode next;
-        public StuffNode prev;
+        private T item;
+        private StuffNode next;
+        private StuffNode prev;
 
         public StuffNode(T item, StuffNode next, StuffNode prev) {
             this.item = item;
@@ -23,13 +23,13 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    public LinkedListDeque(T item) {
-        sentinel = new StuffNode(null, null, null);
-        StuffNode first = new StuffNode(item, sentinel.next, sentinel);
-        sentinel.next = first;
-        sentinel.prev = first;
-        size = 1;
-    }
+//    public LinkedListDeque(T item) {
+//        sentinel = new StuffNode(null, null, null);
+//        StuffNode first = new StuffNode(item, sentinel.next, sentinel);
+//        sentinel.next = first;
+//        sentinel.prev = first;
+//        size = 1;
+//    }
 
     public void addFirst(T item) {
         // sentinel.next = first item
@@ -119,9 +119,7 @@ public class LinkedListDeque<T> {
 
 
     private static void main(String[] args) {
-
         LinkedListDeque<String> L = new LinkedListDeque<>();
-
 
     }
 }

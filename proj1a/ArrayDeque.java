@@ -1,5 +1,6 @@
 public class ArrayDeque<T> {
 
+
     private T[] items;
     private int size;
     private int nextFirst;
@@ -12,7 +13,7 @@ public class ArrayDeque<T> {
         nextLast = 0;
     }
 
-    private int ElementNum() {
+    private int elementNum() {
         return items.length;
     }
 
@@ -41,7 +42,7 @@ public class ArrayDeque<T> {
         items[nextFirst] = item;
         size++;
         nextFirst = minusOne(nextFirst);
-        if (size() == ElementNum()) {
+        if (size() == elementNum()) {
             resize(size() * 2);
             return;
         }
@@ -53,7 +54,7 @@ public class ArrayDeque<T> {
         items[nextLast] = item;
         size++;
         nextLast = plusOne(nextLast);
-        if (size() == ElementNum()) {
+        if (size() == elementNum()) {
             resize(size() * 2);
             return;
         }
@@ -83,19 +84,19 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        if (nextFirst == ElementNum() - 1) {
-            nextFirst -= ElementNum();
+        if (nextFirst == elementNum() - 1) {
+            nextFirst -= elementNum();
         }
         T first = items[nextFirst + 1];
         items[nextFirst + 1] = null;
         size--;
         nextFirst++;
         if (size() == 0) {
-            nextFirst = ElementNum() - 1;
+            nextFirst = elementNum() - 1;
             nextLast = 0;
         }
-        if (ElementNum() > 8 && (float)size() / ElementNum() < 0.25) {
-            resize(ElementNum() / 2);
+        if (elementNum() > 8 && (float)size() / elementNum() < 0.25) {
+            resize(elementNum() / 2);
         }
         return first;
     }
@@ -112,11 +113,11 @@ public class ArrayDeque<T> {
         size--;
         nextLast--;
         if (size() == 0) {
-            nextFirst = ElementNum() - 1;
+            nextFirst = elementNum() - 1;
             nextLast = 0;
         }
-        if (ElementNum() > 8 && (float) size() / ElementNum() < 0.25) {
-            resize(ElementNum() / 2);
+        if (elementNum() > 8 && (float) size() / elementNum() < 0.25) {
+            resize(elementNum() / 2);
         }
         return last;
     }
@@ -125,30 +126,22 @@ public class ArrayDeque<T> {
         if (index >= size) {
             return null;
         }
-        return items[Math.floorMod(nextFirst + 1 + index, ElementNum())];
+        return items[Math.floorMod(nextFirst + 1 + index, elementNum())];
     }
 
 
     private int minusOne(int x) {
-        return Math.floorMod(x - 1, ElementNum());
+        return Math.floorMod(x - 1, elementNum());
     }
 
     private int plusOne(int x) {
-        return Math.floorMod(x + 1, ElementNum());
+        return Math.floorMod(x + 1, elementNum());
     }
 
     private static void main(String[] args) {
         ArrayDeque<Integer> A = new ArrayDeque<>();
         A.addFirst(4);
-        System.out.println((float) (A.size()/32));
-
-//        for(int i = 0; i < 16; i++){
-//            A.addFirst(i);
-//        }
-//        for(int i = 0; i < 14; i++){
-//            A.removeFirst();
-//        }
-
+        System.out.println((float) (A.size() / 32));
 
 
     }
