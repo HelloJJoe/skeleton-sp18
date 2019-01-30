@@ -1,40 +1,40 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class ArrayDequeTest{
+public class ArrayDequeTest {
 
     @Test
-    public void testRandom1(){
+    public void testRandom1() {
         ArrayDeque<Integer> A = new ArrayDeque<>();
-        for(int i = 0; i < 200; i++){
+        for (int i = 0; i < 200; i++){
             A.addLast(i);
         }
         assertEquals(0, (Object) A.get(0));
 
     }
     @Test
-    public void testRandom2(){
+    public void testRandom2() {
         ArrayDeque<Integer> A = new ArrayDeque<>();
-        for(int i = 0; i < 200; i++){
+        for (int i = 0; i < 200; i++) {
             A.addFirst(i);
         }
         assertEquals(199, (Object) A.get(0));
 
     }
     @Test
-    public void testRandom3(){
+    public void testRandom3() {
         ArrayDeque<Integer> A = new ArrayDeque<>();
-        for(int i = 0; i < 200; i++){
+        for(int i = 0; i < 200; i++) {
             A.addFirst(i);
         }
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 100; i++) {
             A.addLast(i);
         }
         assertEquals(199, (Object) A.get(0));
 
     }
     @Test
-    public void testRandom4(){
+    public void testRandom4() {
         ArrayDeque<Integer> A = new ArrayDeque<>();
         A.addLast(0);
         A.addLast(1);
@@ -59,12 +59,12 @@ public class ArrayDequeTest{
         assertEquals(9, (Object) A.get(7));
     }
     @Test
-    public void testResize(){
+    public void testResize() {
         ArrayDeque<Integer> A = new ArrayDeque<>();
-        for(int i = 0; i < 16; i++){
+        for (int i = 0; i < 16; i++) {
             A.addFirst(i);
         }
-        for(int i = 0; i < 14; i++){
+        for (int i = 0; i < 14; i++) {
             A.removeFirst();
         }
         assertEquals(1, (Object) A.get(0));
@@ -72,7 +72,7 @@ public class ArrayDequeTest{
     }
 
     @Test
-    public void testRandom5(){
+    public void testRandom5() {
         ArrayDeque<Integer> A = new ArrayDeque<>();
         A.addFirst(0);
         A.removeFirst();
@@ -81,7 +81,7 @@ public class ArrayDequeTest{
     }
 
     @Test
-    public void testRandom6(){
+    public void testRandom6() {
         ArrayDeque<Integer> A = new ArrayDeque<>();
         A.addFirst(0);
         A.removeLast();
@@ -90,7 +90,7 @@ public class ArrayDequeTest{
     }
 
     @Test
-    public void testRandom7(){
+    public void testRandom7() {
         ArrayDeque<Integer> A = new ArrayDeque<>();
         A.addFirst(0);
         A.removeFirst();
