@@ -95,14 +95,14 @@ public class ArrayDeque<T> {
             nextFirst = elementNum() - 1;
             nextLast = 0;
         }
-        if (elementNum() > 8 && (float)size() / elementNum() < 0.25) {
+        if (elementNum() > 8 && (float) size() / elementNum() < 0.25) {
             resize(elementNum() / 2);
         }
         return first;
     }
 
     public T removeLast() {
-        if (size() == 0){
+        if (size() == 0) {
             return null;
         }
         if (nextLast == 0) {
