@@ -1,19 +1,19 @@
-public class ArrayDeque<T>{
+public class ArrayDeque<T> {
 
-    public T[] items;
+
+    private T[] items;
     private int size;
     private int nextFirst;
     private int nextLast;
-    private int elementNum;
 
-    public ArrayDeque(){
-        elementNum = 8;
-        items = (T []) new Object[elementNum];
+    public ArrayDeque() {
+        items = (T []) new Object[8];
         size = 0;
-        nextFirst = elementNum / 2;
-        nextLast = (elementNum / 2) + 1;
+        nextFirst = 7;
+        nextLast = 0;
     }
 
+<<<<<<< HEAD
     private void calPosition(){
         if(nextFirst < 0){
             nextFirst = elementNum - 1;
@@ -46,13 +46,44 @@ public class ArrayDeque<T>{
             }
             items = newAList;
             nextFirst = newAListElementNum / 2 - addFirstNum;
-        }
-        items[nextFirst] = item;
-        nextFirst--;
-        calPosition();
-        size++;
+=======
+    private int elementNum() {
+        return items.length;
     }
 
+    /** Resize the A */
+    private void resize(int capacity) {
+        T[] newAList = (T []) new Object[capacity];
+        /** copy the old items element to newAlist **/
+
+        // index of newAList
+        int j = 0;
+        int i = plusOne(nextFirst);
+        int counter = 0;
+        while (counter < size()) {
+            newAList[j] = items[i];
+            j++;
+            i = plusOne(i);
+            counter++;
+>>>>>>> 7a4ff1a0ddf93fba8153d0657f4c6731366e87d0
+        }
+        nextLast = j;
+        nextFirst = capacity - 1;
+        items = newAList;
+    }
+
+
+    public void addFirst(T item) {
+        items[nextFirst] = item;
+        size++;
+        nextFirst = minusOne(nextFirst);
+        if (size() == elementNum()) {
+            resize(size() * 2);
+            return;
+        }
+    }
+
+<<<<<<< HEAD
     public void addLast(T item){
         if(size == items.length){
             int newAListElementNum = size * 2;
@@ -78,71 +109,108 @@ public class ArrayDeque<T>{
             items = newAList;
             nextLast = newAListElementNum / 2 + 1 + addLastNum;
         }
+=======
+
+
+    public void addLast(T item) {
+>>>>>>> 7a4ff1a0ddf93fba8153d0657f4c6731366e87d0
         items[nextLast] = item;
-        nextLast++;
-        calPosition();
         size++;
+        nextLast = plusOne(nextLast);
+        if (size() == elementNum()) {
+            resize(size() * 2);
+            return;
+        }
     }
 
-    public boolean isEmpty(){
-        if(size == 0){
+
+    public boolean isEmpty() {
+        if (size == 0) {
             return true;
         }
         return false;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
-    public void printDeque(){
-        for(T item : items){
+    public void printDeque() {
+        for (T item : items) {
             System.out.print(item + " ");
         }
         System.out.println();
     }
 
 
-
-    public T removeFirst(){
-        if(size == 0 || nextFirst == 0){
+    public T removeFirst() {
+        if (size == 0) {
             return null;
         }
-        if(nextFirst == 7){
-            nextFirst -= 8;
+        if (nextFirst == elementNum() - 1) {
+            nextFirst -= elementNum();
         }
         T first = items[nextFirst + 1];
         items[nextFirst + 1] = null;
         size--;
         nextFirst++;
-        calPosition();
+        if (size() == 0) {
+            nextFirst = elementNum() - 1;
+            nextLast = 0;
+        }
+        if (elementNum() > 8 && (float) size() / elementNum() < 0.25) {
+            resize(elementNum() / 2);
+        }
         return first;
     }
 
-    public T removeLast(){
-        if(size == 0 || nextLast == 1){
+    public T removeLast() {
+        if (size() == 0) {
             return null;
         }
-
-        if(nextLast == 0){
+        if (nextLast == 0) {
             nextLast += 8;
         }
         T last = items[nextLast - 1];
         items[nextLast - 1] = null;
         size--;
         nextLast--;
-        calPosition();
+        if (size() == 0) {
+            nextFirst = elementNum() - 1;
+            nextLast = 0;
+        }
+        if (elementNum() > 8 && (float) size() / elementNum() < 0.25) {
+            resize(elementNum() / 2);
+        }
         return last;
     }
 
-    public T get(int index){
-        if(items[index] == null){
+    public T get(int index) {
+        if (index >= size) {
             return null;
         }
-        return items[index];
+        return items[Math.floorMod(nextFirst + 1 + index, elementNum())];
     }
 
 
+    private int minusOne(int x) {
+        return Math.floorMod(x - 1, elementNum());
+    }
 
+<<<<<<< HEAD
+=======
+    private int plusOne(int x) {
+        return Math.floorMod(x + 1, elementNum());
+    }
+
+    private static void main(String[] args) {
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addFirst(4);
+        System.out.println((float) (A.size() / 32));
+
+
+    }
+
+>>>>>>> 7a4ff1a0ddf93fba8153d0657f4c6731366e87d0
 
 }

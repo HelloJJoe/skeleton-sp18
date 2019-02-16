@@ -72,6 +72,10 @@ public class IntList {
         return new IntList(L.first * L.first, squareListRecursive(L.rest));
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7a4ff1a0ddf93fba8153d0657f4c6731366e87d0
     /** DO NOT MODIFY ANYTHING ABOVE THIS LINE! */
 
 
@@ -106,6 +110,7 @@ public class IntList {
     }
 
     public static IntList reverse(IntList A){
+<<<<<<< HEAD
         IntList t = A.rest;
         IntList t2 = A;
         A = A.rest;
@@ -156,6 +161,24 @@ public class IntList {
             }
             current = current.rest;
         }
+=======
+        if(A == null || A.rest == null){
+            return A;
+        }
+        IntList endOfReversed = A.rest;
+        IntList reversed = reverse(A.rest);
+        endOfReversed.rest = A;
+        A.rest = null;
+        return reversed;
+    }
+
+
+    public int size(){
+        if (rest == null) {
+            return 1;
+        }
+        return 1 + rest.size();
+>>>>>>> 7a4ff1a0ddf93fba8153d0657f4c6731366e87d0
     }
 
 
@@ -174,8 +197,11 @@ public class IntList {
 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 7a4ff1a0ddf93fba8153d0657f4c6731366e87d0
     /**
      * DO NOT MODIFY ANYTHING BELOW THIS LINE! Many of the concepts below here
      * will be introduced later in the course or feature some form of advanced

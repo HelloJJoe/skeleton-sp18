@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
@@ -28,4 +29,8 @@ public interface Deque<T> {
     // Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth. If no such item exists, returns null. Must not alter the deque!
     public T get(int index);
 
+=======
+public class Deque{
+    
+>>>>>>> 7a4ff1a0ddf93fba8153d0657f4c6731366e87d0
 }
