@@ -2,17 +2,17 @@
 public class PalindromeFinder {
 
     public static void main(String[] args) {
-//        int minLength = 4;
-//        In in = new In("../library-sp18/data/words.txt");
-//        Palindrome palindrome = new Palindrome();
-//        OffByOne obo = new OffByOne();
-//        OffByN ob5 = new OffByN(5);
-//
-//        while (!in.isEmpty()) {
-//            String word = in.readString();
-//            if (word.length() >= minLength && palindrome.isPalindrome(word, ob5)) {
-//                System.out.println(word);
-//            }
-//        }
+        int minLength = 4;
+        In in = new In("../library-sp18/data/words.txt");
+        Palindrome palindrome = new Palindrome();
+        OffByOne obo = new OffByOne();
+        OffByN ob5 = new OffByN(5);
+
+        while (!in.isEmpty()) {
+            String word = in.readString();
+            if (word.length() >= minLength && palindrome.isPalindrome(word, ob5)) {
+                System.out.println(word);
+            }
+        }
     }
 }

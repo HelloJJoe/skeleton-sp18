@@ -1,12 +1,12 @@
-public class ArrayDeque<T> implements Deque<T>{
+public class ArrayDeque<T> implements Deque<T> {
 
-    public T[] items;
+    private T[] items;
     private int size;
     private int nextFirst;
     private int nextLast;
     private int elementNum;
 
-    public ArrayDeque(){
+    public ArrayDeque() {
         elementNum = 8;
         items = (T []) new Object[elementNum];
         size = 0;
@@ -14,31 +14,31 @@ public class ArrayDeque<T> implements Deque<T>{
         nextLast = (elementNum / 2) + 1;
     }
 
-    private void calPosition(){
-        if(nextFirst < 0){
+    private void calPosition() {
+        if (nextFirst < 0) {
             nextFirst = elementNum - 1;
         }
-        if(nextLast > elementNum - 1){
+        if (nextLast > elementNum - 1) {
             nextLast = 0;
         }
     }
 
     @Override
-    public void addFirst(T item){
-        if(size == items.length){
+    public void addFirst(T item) {
+        if (size == items.length) {
             int newAListElementNum = size * 2;
             T[] newAList = (T []) new Object[newAListElementNum];
             // copy all of addFirst element to newAList
             int counter = 0;
             int addFirstNum;
-            if(nextFirst > elementNum / 2){
+            if (nextFirst > elementNum / 2) {
                 addFirstNum = elementNum / 2 - nextFirst;
-            }else{
+            }else {
                 addFirstNum = elementNum / 2 - (nextFirst - elementNum);
             }
-            while(counter < addFirstNum){
+            while (counter < addFirstNum) {
                 int oldAListFirstPos = elementNum / 2 - counter;
-                if(oldAListFirstPos < 0){
+                if (oldAListFirstPos < 0) {
                     oldAListFirstPos += elementNum;
                 }
                 newAList[newAListElementNum / 2 - counter] = items[oldAListFirstPos];
@@ -54,8 +54,8 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     @Override
-    public void addLast(T item){
-        if(size == items.length){
+    public void addLast(T item) {
+        if (size == items.length) {
             int newAListElementNum = size * 2;
             T[] newAList = (T []) new Object[newAListElementNum];
 
@@ -63,14 +63,14 @@ public class ArrayDeque<T> implements Deque<T>{
             int counter = 0;
             int addLastNum;
             int oldAListLastPos;
-            if(nextLast > elementNum / 2 + 1){
+            if (nextLast > elementNum / 2 + 1) {
                 addLastNum = nextLast - elementNum / 2 + 1;
-            }else{
+            }else {
                 addLastNum = nextLast + elementNum - (elementNum / 2 + 1);
             }
-            while(counter < addLastNum){
+            while (counter < addLastNum) {
                 oldAListLastPos = (elementNum / 2 + 1) + counter;
-                if(oldAListLastPos > elementNum - 1){
+                if (oldAListLastPos > elementNum - 1) {
                     oldAListLastPos -= elementNum;
                 }
                 newAList[newAListElementNum / 2 + 1 + counter] = items[oldAListLastPos];
@@ -86,21 +86,21 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     @Override
-    public boolean isEmpty(){
-        if(size == 0){
+    public boolean isEmpty() {
+        if (size == 0) {
             return true;
         }
         return false;
     }
 
     @Override
-    public int size(){
+    public int size() {
         return size;
     }
 
     @Override
-    public void printDeque(){
-        for(T item : items){
+    public void printDeque() {
+        for (T item : items) {
             System.out.print(item + " ");
         }
         System.out.println();
@@ -108,11 +108,11 @@ public class ArrayDeque<T> implements Deque<T>{
 
 
     @Override
-    public T removeFirst(){
-        if(size == 0 || nextFirst == 0){
+    public T removeFirst() {
+        if (size == 0 || nextFirst == 0) {
             return null;
         }
-        if(nextFirst == 7){
+        if (nextFirst == 7) {
             nextFirst -= 8;
         }
         T first = items[nextFirst + 1];
@@ -124,12 +124,12 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     @Override
-    public T removeLast(){
-        if(size == 0 || nextLast == 1){
+    public T removeLast() {
+        if (size == 0 || nextLast == 1) {
             return null;
         }
 
-        if(nextLast == 0){
+        if (nextLast == 0) {
             nextLast += 8;
         }
         T last = items[nextLast - 1];
@@ -141,8 +141,8 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     @Override
-    public T get(int index){
-        if(items[index] == null){
+    public T get(int index) {
+        if (items[index] == null) {
             return null;
         }
         return items[index];
