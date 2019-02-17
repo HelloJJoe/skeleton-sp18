@@ -33,7 +33,7 @@ public class ArrayDeque<T> implements Deque<T> {
             int addFirstNum;
             if (nextFirst > elementNum / 2) {
                 addFirstNum = elementNum / 2 - nextFirst;
-            }else {
+            } else {
                 addFirstNum = elementNum / 2 - (nextFirst - elementNum);
             }
             while (counter < addFirstNum) {
@@ -65,7 +65,7 @@ public class ArrayDeque<T> implements Deque<T> {
             int oldAListLastPos;
             if (nextLast > elementNum / 2 + 1) {
                 addLastNum = nextLast - elementNum / 2 + 1;
-            }else {
+            } else {
                 addLastNum = nextLast + elementNum - (elementNum / 2 + 1);
             }
             while (counter < addLastNum) {
@@ -147,8 +147,5 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         return items[index];
     }
-
-
-
-
 }
+

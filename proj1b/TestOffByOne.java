@@ -20,3 +20,4 @@ public class TestOffByOne {
         assertTrue(offByOne.equalChars('&',  '%'));
     }
 }
+

@@ -23,3 +23,4 @@ public interface Deque<T> {
 
     public T get(int index);
 }
+

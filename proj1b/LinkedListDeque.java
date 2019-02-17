@@ -1,6 +1,6 @@
 public class LinkedListDeque<T> implements Deque<T> {
 
-    public class StuffNode{
+    public class StuffNode {
 
         private T item;
         private StuffNode next;
@@ -124,3 +124,4 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
 }
+
