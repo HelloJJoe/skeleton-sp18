@@ -7,40 +7,49 @@ public class TestArrayDequeGold {
     public void random() {
         StudentArrayDeque<Integer> stu = new StudentArrayDeque<>();
         ArrayDequeSolution<Integer> sol = new ArrayDequeSolution<>();
+        String msg = "";
+        Integer actual;
+        Integer expect;
 
-        for (int i = 0; i < 10; i += 1) {
-            Double numberBetweenZeroAndOne = StdRandom.uniform();
+        for (int i = 0; i < 1000; i += 1) {
+            Integer numberBetweenZeroAndOne = StdRandom.uniform(1,10);
 
-            if (numberBetweenZeroAndOne < 0.5) {
-                stu.addFirst(i);
-                sol.addFirst(i);
-                System.out.println("addFirst(" + i + ')' );
-            } else {
-                stu.addLast(i);
-                sol.addLast(i);
-                System.out.println("addLast(" + i + ')' );
+            switch (numberBetweenZeroAndOne) {
+                case 1:
+                    stu.addFirst(i);
+                    sol.addFirst(i);
+                    msg += "addFirst(" + i + ")\n";
+                    break;
+
+                case 2:
+                    stu.addFirst(i);
+                    sol.addFirst(i);
+                    msg += "addLast(" + i + ")\n";
+                    break;
+
+                case 3:
+                    if (stu.size() == 0 || sol.size() == 0) {
+                        break;
+                    }
+                    actual = stu.removeFirst();
+                    expect = sol.removeFirst();
+                    msg += "removeFirst(" + i + ")\n";
+                    assertEquals(msg,expect, actual);
+
+                    break;
+
+                case 4:
+                    if (stu.size() == 0 || sol.size() == 0) {
+                        break;
+                    }
+                    actual = stu.removeLast();
+                    expect = sol.removeLast();
+                    msg += "removeLast(" + i + ")\n";
+                    assertEquals(msg,expect, actual);
+
+                    break;
+
             }
-
-        }
-        for (int i = 0; i < 5; i += 1) {
-            Double numberBetweenZeroAndOne = StdRandom.uniform();
-
-            Integer actual;
-            Integer expect;
-            if (numberBetweenZeroAndOne < 0) {
-                actual = stu.removeFirst();
-                expect = sol.removeFirst();
-                System.out.println("removeFirst(" + i + ')' );
-
-            } else {
-                actual = stu.removeLast();
-                expect = sol.removeLast();
-                System.out.println("removeLast(" + i + ')' );
-
-            }
-            assertEquals("Oh noooo! This is bad:\n   Actual number " + actual
-                            + " not equal to " + expect + "!",
-                    expect, actual);
         }
 
 
