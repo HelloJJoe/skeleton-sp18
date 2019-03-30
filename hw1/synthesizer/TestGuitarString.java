@@ -53,6 +53,24 @@ public class TestGuitarString {
 
     }
 
+    @Test
+    public void testRandom() {
+        GuitarString s = new GuitarString(11025);
+        s.pluck();
+        s.tic();
+        s.tic();
+        s.tic();
+        s.tic();
+        s.tic();
+        s.tic();
+        s.tic();
+        s.tic();
+        s.tic();
+
+
+
+    }
+
 
     /** Calls tests for GuitarString. */
     public static void main(String[] args) {
