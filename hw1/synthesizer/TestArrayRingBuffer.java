@@ -32,22 +32,6 @@ public class TestArrayRingBuffer {
 
     }
 
-    @Test
-    public void testIterator() {
-        ArrayRingBuffer<Integer> arb = new ArrayRingBuffer<>(5);
-        ArrayRingBuffer.keyIterator arbi = arb.new keyIterator();
-        arb.enqueue(1);
-        arb.enqueue(2);
-        arb.enqueue(3);
-        arb.enqueue(4);
-        arb.enqueue(5);
-
-        for (int number : arb) {
-            System.out.println(number);
-        }
-
-
-    }
     /** Calls tests for ArrayRingBuffer. */
     public static void main(String[] args) {
 //        jh61b.junit.textui.runClasses(TestArrayRingBuffer.class);
@@ -57,8 +41,17 @@ public class TestArrayRingBuffer {
         arb.enqueue(2);
         arb.enqueue(3);
         arb.enqueue(4);
-        arb.enqueue(5);
-        System.out.println("1234");
+
+
+        Iterator<Integer> arbi = arb.iterator();
+//
+//        while (arbi.hasNext()) {
+//            System.out.println(arbi.next());
+//        }
+
+        for (int number : arb) {
+            System.out.println(number);
+        }
 
     }
 } 

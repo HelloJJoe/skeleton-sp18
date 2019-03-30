@@ -21,7 +21,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
 
         @Override
         public boolean hasNext() {
-            return ptr == fillCount();
+            return ptr != fillCount();
         }
 
         @Override
