@@ -12,4 +12,17 @@ import java.util.Random;
  * Draws a world consisting of hexagonal regions.
  */
 public class HexWorld {
+
+    private static final int WIDTH = 60;
+    private static final int HEIGHT = 30;
+
+    public static void main(String[] args) {
+        /**
+         * 1. initializing the tile rendering engine.
+         * 2. generating a two dimensional TETile[][] array
+         * 3. using the tile rendering engine to display the TETile[][] array.
+         * */
+
+
+    }
 }
