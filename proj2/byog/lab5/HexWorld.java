@@ -108,7 +108,7 @@ public class HexWorld {
 
 
         for (int i = 0; i < amount; i += 1) {
-            int tileNum = RANDOM.nextInt(3);
+            int tileNum = RANDOM.nextInt(5);
             addHexagon(number, world, newP, tileNum);
             newP.y += 2 * number;
         }
@@ -158,6 +158,8 @@ public class HexWorld {
             case 0: return Tileset.WALL;
             case 1: return Tileset.FLOWER;
             case 2: return Tileset.TREE;
+            case 3: return Tileset.WATER;
+            case 4: return Tileset.PLAYER;
             default: return Tileset.GRASS;
         }
     }
