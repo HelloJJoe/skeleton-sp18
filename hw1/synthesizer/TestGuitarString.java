@@ -56,9 +56,11 @@ public class TestGuitarString {
     @Test
     public void testRandom() {
         GuitarString s = new GuitarString(11025);
+
         s.pluck();
 
         // Record the front four values, ticcing as we go.
+        s.sample();
         double s1 = s.sample();
         s.tic();
         double s2 = s.sample();
