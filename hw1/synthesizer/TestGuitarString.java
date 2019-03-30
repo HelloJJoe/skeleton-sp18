@@ -57,16 +57,27 @@ public class TestGuitarString {
     public void testRandom() {
         GuitarString s = new GuitarString(11025);
         s.pluck();
-        s.tic();
-        s.tic();
-        s.tic();
-        s.tic();
-        s.tic();
-        s.tic();
-        s.tic();
-        s.tic();
-        s.tic();
 
+        // Record the front four values, ticcing as we go.
+        double s1 = s.sample();
+        s.tic();
+        double s2 = s.sample();
+        s.tic();
+        double s3 = s.sample();
+        s.tic();
+        double s4 = s.sample();
+
+        // If we tic once more, it should be equal to 0.996*0.5*(s1 + s2)
+        s.tic();
+        double s5 = s.sample();
+        double expected_1 = 0.996 * 0.5 * (s1 + s2);
+
+        s.tic();
+        double s6 = s.sample();
+        double expected_2 = 0.996 * 0.5 * (s2 + s3);
+
+        assertEquals(expected_1, s5, 0.001);
+        assertEquals(expected_2, s6, 0.001);
 
 
     }
