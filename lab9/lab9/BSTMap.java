@@ -193,7 +193,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     private Node findParent (K key, Node p) {
         if (p.key == key) {
-            return root;
+            return p;
         } else if (p.left != null && p.left.key == key) {
             return p;
         } else if (p.right != null && p.right.key == key) {
@@ -212,12 +212,16 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      **/
     @Override
     public V remove(K key, V value) {
-        throw new UnsupportedOperationException();
+        if (get(key) == value) {
+            return null;
+        }
+        return remove(key);
     }
 
     @Override
     public Iterator<K> iterator() {
-        throw new UnsupportedOperationException();
+        Set<K> set = keySet();
+        return set.iterator();
     }
 
     public static void main(String[] args) {
@@ -226,7 +230,9 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         bstmap.put("cat", 10);
         bstmap.put("fish", 22);
         bstmap.put("zebra", 90);
-        bstmap.remove("fish");
-
+        bstmap.iterator();
+        for (String str : bstmap) {
+            System.out.println(str);
+        }
     }
 }
