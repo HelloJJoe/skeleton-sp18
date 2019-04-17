@@ -121,10 +121,10 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     @Override
     public V remove(K key) {
         Node parent = findParent(key, root);
-        Boolean isRoot = parent == root;
+        Boolean parentIsRoot = parent == root && parent.key == key;
         V toReturn = parent.value;
 
-        if (!isRoot) {
+        if (!parentIsRoot) {
             Node child = parent.key.compareTo(key) > 0 ? parent.left : parent.right;
             toReturn  = child.value;
 

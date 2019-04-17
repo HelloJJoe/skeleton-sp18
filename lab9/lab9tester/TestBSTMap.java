@@ -91,52 +91,52 @@ public class TestBSTMap {
         assertTrue(b.get("hi") != null);
     }
 
-    @Test
-    public void keySetTest() {
-        BSTMap<String, Integer> bstmap = new BSTMap<>();
-        bstmap.put("hello", 5);
-        bstmap.put("cat", 10);
-        bstmap.put("fish", 22);
-        bstmap.put("zebra", 90);
-        Set<String> keySet = new HashSet<>(Arrays.asList("hello", "cat", "fish", "zebra"));
-        assertTrue(keySet.equals(bstmap.keySet()));
-
-    }
-
-    @Test
-    public void removeNoChildTest() {
-        BSTMap<String, Integer> bstmap = new BSTMap<>();
-        bstmap.put("hello", 5);
-        bstmap.put("cat", 10);
-        bstmap.put("fish", 22);
-        bstmap.put("zebra", 90);
-        int act = bstmap.remove("fish");
-        assertEquals(22, act);
-    }
-
-    @Test
-    public void removeOneChildTest() {
-        BSTMap<String, Integer> bstmap = new BSTMap<>();
-        bstmap.put("hello", 5);
-        bstmap.put("cat", 10);
-        bstmap.put("fish", 22);
-        bstmap.put("zebra", 90);
-        int act = bstmap.remove("cat");
-        assertEquals(null, bstmap.get("cat"));
-        assertEquals(10, act);
-    }
-
-    @Test
-    public void removeTwoChildTest() {
-        BSTMap<String, Integer> bstmap = new BSTMap<>();
-        bstmap.put("hello", 5);
-        bstmap.put("cat", 10);
-        bstmap.put("fish", 22);
-        bstmap.put("zebra", 90);
-        int act = bstmap.remove("hello");
-        assertEquals(null, bstmap.get("hello"));
-        assertEquals(5, act);
-    }
+//    @Test
+//    public void keySetTest() {
+//        BSTMap<String, Integer> bstmap = new BSTMap<>();
+//        bstmap.put("hello", 5);
+//        bstmap.put("cat", 10);
+//        bstmap.put("fish", 22);
+//        bstmap.put("zebra", 90);
+//        Set<String> keySet = new HashSet<>(Arrays.asList("hello", "cat", "fish", "zebra"));
+//        assertTrue(keySet.equals(bstmap.keySet()));
+//
+//    }
+//
+//    @Test
+//    public void removeNoChildTest() {
+//        BSTMap<String, Integer> bstmap = new BSTMap<>();
+//        bstmap.put("hello", 5);
+//        bstmap.put("cat", 10);
+//        bstmap.put("fish", 22);
+//        bstmap.put("zebra", 90);
+//        int act = bstmap.remove("fish");
+//        assertEquals(22, act);
+//    }
+//
+//    @Test
+//    public void removeOneChildTest() {
+//        BSTMap<String, Integer> bstmap = new BSTMap<>();
+//        bstmap.put("hello", 5);
+//        bstmap.put("cat", 10);
+//        bstmap.put("fish", 22);
+//        bstmap.put("zebra", 90);
+//        int act = bstmap.remove("cat");
+//        assertEquals(null, bstmap.get("cat"));
+//        assertEquals(10, act);
+//    }
+//
+//    @Test
+//    public void removeTwoChildTest() {
+//        BSTMap<String, Integer> bstmap = new BSTMap<>();
+//        bstmap.put("hello", 5);
+//        bstmap.put("cat", 10);
+//        bstmap.put("fish", 22);
+//        bstmap.put("zebra", 90);
+//        int act = bstmap.remove("hello");
+//        assertEquals(null, bstmap.get("hello"));
+//        assertEquals(5, act);
+//    }
 
     public static void main(String[] args) {
         jh61b.junit.TestRunner.runTests(TestBSTMap.class);
