@@ -1,5 +1,6 @@
 package lab9;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -99,7 +100,18 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     /* Returns a Set view of the keys contained in this map. */
     @Override
     public Set<K> keySet() {
-        throw new UnsupportedOperationException();
+        Set<K> set = new HashSet<>();
+        traverse(root, set);
+        return set;
+    }
+
+    private void traverse(Node p, Set<K> keySet ) {
+        if (p == null) {
+            return;
+        }
+        traverse(p.left, keySet);
+        keySet.add(p.key);
+        traverse(p.right, keySet);
     }
 
     /** Removes KEY from the tree if present
@@ -108,7 +120,90 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      */
     @Override
     public V remove(K key) {
-        throw new UnsupportedOperationException();
+        Node parent = findParent(key, root);
+        Boolean isRoot = parent == root;
+        V toReturn = parent.value;
+
+        if (!isRoot) {
+            Node child = parent.key.compareTo(key) > 0 ? parent.left : parent.right;
+            toReturn  = child.value;
+
+
+            if (child.left == null && child.right == null) {
+                if (parent.key.compareTo(key) > 0 ) {
+                    parent.left = null;
+                } else {
+                    parent.right = null;
+                }
+            } else if (child.left == null || child.right == null) {
+
+                if (parent.key.compareTo(key) > 0 ) {
+                    parent.left = child.left == null ? child.right : child.left;
+                } else {
+                    parent.right = child.left == null ? child.right : child.left;;
+                }
+            } else {
+                Node temp = child.left;
+                while (temp.right != null) {
+                    temp = temp.right;
+                }
+                Node tempLeftMostNode = temp;
+                while (tempLeftMostNode.left != null) {
+                    tempLeftMostNode = tempLeftMostNode.left;
+                }
+                temp.right = child.right;
+                tempLeftMostNode.left = child.left;
+                if (parent == root) {
+                    root = temp;
+                } else {
+                    if (parent.key.compareTo(key) > 0) {
+                        parent.left = temp;
+                    } else {
+                        parent.right = temp;
+                    }
+                }
+            }
+
+        } else {
+            if (parent.left == null && parent.right == null) {
+                root = null;
+            } else if (parent.left == null || parent.right == null) {
+                root = parent.key.compareTo(key) > 0 ? parent.left : parent.right;
+            } else {
+                Node temp = parent.left;
+                while (temp.right != null) {
+                    temp = temp.right;
+                }
+                Node tempLeftMostNode = temp;
+                while (tempLeftMostNode.left != null) {
+                    tempLeftMostNode = tempLeftMostNode.left;
+                }
+                temp.right = parent.right;
+                tempLeftMostNode.left = parent.left;
+                root = temp;
+            }
+        }
+
+
+
+
+        return toReturn;
+
+    }
+
+    private Node findParent (K key, Node p) {
+        if (p.key == key) {
+            return root;
+        } else if (p.left != null && p.left.key == key) {
+            return p;
+        } else if (p.right != null && p.right.key == key) {
+            return p;
+        } else if (p.key.compareTo(key) > 0) {
+            p = findParent(key, p.left);
+        } else if (p.key.compareTo(key) < 0) {
+            p = findParent(key, p.right);
+        }
+        return p;
     }
 
     /** Removes the key-value entry for the specified key only if it is
@@ -131,5 +226,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         bstmap.put("cat", 10);
         bstmap.put("fish", 22);
         bstmap.put("zebra", 90);
+        bstmap.remove("fish");
+
     }
 }
