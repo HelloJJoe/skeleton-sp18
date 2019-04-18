@@ -1,5 +1,7 @@
 package lab9;
 
+import edu.princeton.cs.algs4.BST;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -125,50 +127,53 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         V toReturn = parent.value;
 
         if (!parentIsRoot) {
-            Node child = parent.key.compareTo(key) > 0 ? parent.left : parent.right;
-            toReturn  = child.value;
+            Node toRemove = parent.key.compareTo(key) > 0 ? parent.left : parent.right;
+            toReturn  = toRemove.value;
 
 
-            if (child.left == null && child.right == null) {
+            if (toRemove.left == null && toRemove.right == null) {
                 if (parent.key.compareTo(key) > 0 ) {
                     parent.left = null;
                 } else {
                     parent.right = null;
                 }
-            } else if (child.left == null || child.right == null) {
+            } else if (toRemove.left == null || toRemove.right == null) {
 
                 if (parent.key.compareTo(key) > 0 ) {
-                    parent.left = child.left == null ? child.right : child.left;
+                    parent.left = toRemove.left == null ? toRemove.right : toRemove.left;
                 } else {
-                    parent.right = child.left == null ? child.right : child.left;;
+                    parent.right = toRemove.left == null ? toRemove.right : toRemove.left;;
                 }
             } else {
-                Node temp = child.left;
+                Node newChild = new Node(toRemove.left.key, toRemove.left.value);
+                Node temp = toRemove.left;
                 while (temp.right != null) {
                     temp = temp.right;
                 }
-                Node tempLeftMostNode = temp;
-                while (tempLeftMostNode.left != null) {
+                newChild.key = temp.key;
+                newChild.value = temp.value;
+
+                Node tempLeftMostNode = temp.left;
+                while (tempLeftMostNode != null) {
                     tempLeftMostNode = tempLeftMostNode.left;
                 }
-                temp.right = child.right;
-                tempLeftMostNode.left = child.left;
-                if (parent == root) {
-                    root = temp;
+
+                newChild.right = toRemove.right;
+                tempLeftMostNode = toRemove.left;
+
+                if (parent.key.compareTo(key) > 0) {
+                    parent.left = newChild;
                 } else {
-                    if (parent.key.compareTo(key) > 0) {
-                        parent.left = temp;
-                    } else {
-                        parent.right = temp;
-                    }
+                    parent.right = newChild;
                 }
+
             }
 
         } else {
             if (parent.left == null && parent.right == null) {
                 root = null;
             } else if (parent.left == null || parent.right == null) {
-                root = parent.key.compareTo(key) > 0 ? parent.left : parent.right;
+                root = parent.left == null ? parent.right : parent.left;
             } else {
                 Node temp = parent.left;
                 while (temp.right != null) {
