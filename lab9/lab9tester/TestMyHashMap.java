@@ -5,6 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import lab9.MyHashMap;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+
 /**
  * Tests by Brendan Hu, Spring 2015, revised for 2018 by Josh Hug
  */
@@ -126,6 +131,31 @@ public class TestMyHashMap {
         assertEquals(345, studentIDs.get("evil alan").intValue());
         assertEquals(studentIDs.get("evil alan"), studentIDs.get("alan"));
     }
+
+//    @Test
+//    public void keysetTest() {
+//        MyHashMap<String, Integer> mhm = new MyHashMap<>();
+//        mhm.put("hello", 5);
+//        mhm.put("cat", 10);
+//        mhm.put("fish", 22);
+//        mhm.put("zebra", 90);
+//        Set<String> set = mhm.keySet();
+//        Set<String> exp = new HashSet<>(Arrays.asList("hello", "cat", "fish", "zebra"));
+//        assertTrue(set.equals(exp));
+//
+//    }
+//
+//    @Test
+//    public void removeTest() {
+//        MyHashMap<String, Integer> mhm = new MyHashMap<>();
+//        mhm.put("hello", 5);
+//        mhm.put("cat", 10);
+//        mhm.put("fish", 22);
+//        mhm.put("zebra", 90);
+//        int toRemove = mhm.remove("cat");
+//        assertEquals(10, toRemove);
+//        assertTrue(mhm.get("cat") == null);
+//    }
 
     public static void main(String[] args) {
         jh61b.junit.TestRunner.runTests(TestMyHashMap.class);
