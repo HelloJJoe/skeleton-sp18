@@ -34,85 +34,49 @@ public class Percolation {
     }
     // open the site (row, col) if it is not open already
     public void open(int row, int col) {
-        if (row < 0 || row > grid || col < 0 || col > grid) {
-            throw new IndexOutOfBoundsException("arguments are out of bounds");
-        }
-        if (isOpen(row, col)) return;
-
+        validate(row, col);
         int position = rsTo1D(row, col);
+
+        if (isOpen(position)) return;
+
         openSite[position] = true;
         numberOfOpenSites++;
 
-        // Top row of the N-by-N grids.
-        if (position < grid) {
-            checkUnion(position, bottomOfPosition(position));
+        if (row > 0 && isOpen(position - grid)) {
+            wqu.union(position, position - grid);
+            noBackWash.union(position, position - grid);
+        }
+        if (row < grid - 1 && isOpen(position + grid)) {
+            wqu.union(position, position + grid);
+            noBackWash.union(position, position + grid);
+        }
+        if (col > 0 && isOpen(position - 1)) {
+            wqu.union(position, position - 1);
+            noBackWash.union(position, position - 1);
+        }
+        if (col < grid - 1 && isOpen(position + 1)) {
+            wqu.union(position, position + 1);
+            noBackWash.union(position, position + 1);
+        }
+        if (row == 0) {
             wqu.union(position, vTopSite);
             noBackWash.union(position, vTopSite);
-            if (position == 0) {
-                checkUnion(position, rightOfPosition(position));
-            } else if (position == grid - 1) {
-                checkUnion(position, leftOfPosition(position));
-            } else {
-                checkUnion(position, leftOfPosition(position));
-                checkUnion(position, rightOfPosition(position));
-            }
-        //  Middle rows of the N-by-N grids.
-        } else if (position >= grid && position < grid * (grid - 1)) {
-            checkUnion(position, topOfPosition(position));
-            checkUnion(position, bottomOfPosition(position));
-
-            if (position % grid == 0) {
-                checkUnion(position, rightOfPosition(position));
-            } else if (position % grid == grid - 1) {
-                checkUnion(position, leftOfPosition(position));
-            } else {
-                checkUnion(position, rightOfPosition(position));
-                checkUnion(position, leftOfPosition(position));
-            }
-        // Bottom row of the N-by-N grid.
-        } else {
-            checkUnion(position, topOfPosition(position));
+        }
+        if (row == grid - 1) {
             wqu.union(position, vBottomSite);
-            if (position == grid * (grid - 1)) {
-                checkUnion(position, rightOfPosition(position));
-            } else if (position == grid * grid - 1) {
-                checkUnion(position, leftOfPosition(position));
-            } else {
-                checkUnion(position, rightOfPosition(position));
-                checkUnion(position, leftOfPosition(position));
-            }
         }
     }
 
-    private int leftOfPosition(int position) {
-        return position - 1;
-    }
-
-    private int rightOfPosition(int position) {
-        return position + 1;
-    }
-
-    private int topOfPosition(int position) {
-        return position - grid;
-    }
-
-    private int bottomOfPosition(int position) {
-        return position + grid;
-    }
-
-    private void checkUnion(int position, int neighbor) {
-        if (isOpen(neighbor)) {
-            wqu.union(position, neighbor);
-            noBackWash.union(position, neighbor);
-
+    private void validate(int row, int col) {
+        if (row < 0 || row > grid - 1 || col < 0 || col > grid - 1) {
+            throw new IndexOutOfBoundsException("arguments are out of bounds");
         }
     }
+
 
     // is the site (row, col) open?
     public boolean isOpen(int row, int col) {
-        if (row < 0 || row > grid || col < 0 || col > grid) {
-            throw new IndexOutOfBoundsException("arguments are out of bounds");
-        }
+        validate(row, col);
         int position = rsTo1D(row, col);
         return isOpen(position);
     }
@@ -125,9 +89,7 @@ public class Percolation {
 
     // is the site (row, col) full?
     public boolean isFull(int row, int col) {
-        if (row < 0 || row > grid || col < 0 || col > grid) {
-            throw new IndexOutOfBoundsException("arguments are out of bounds");
-        }
+        validate(row, col);
         int position = rsTo1D(row, col);
 
         // Method 2: high efficiency
