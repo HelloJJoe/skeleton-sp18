@@ -1,5 +1,4 @@
 package hw2;
-import java.lang.IllegalArgumentException;
 import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
 
@@ -8,8 +7,8 @@ public class PercolationStats {
     private int T;
     // perform T independent experiments on an N-by-N grid
     public PercolationStats(int N, int T, PercolationFactory pf) {
-        if (N <= 0) {
-            throw new IllegalArgumentException("N must be larger than zero");
+        if (N <= 0 || T <= 0) {
+            throw new IllegalArgumentException("N must be larger than zero and T must larger than 0");
         }
         this.T = T;
         int t = 0;
@@ -18,7 +17,7 @@ public class PercolationStats {
             Percolation p = pf.make(N);
             while (!p.percolates()) {
                 int row = StdRandom.uniform(0, N);
-                int col = StdRandom.uniform(0 , N);
+                int col = StdRandom.uniform(0, N);
                 if (!p.isOpen(row, col)) {
                     p.open(row, col);
                 }
@@ -42,20 +41,21 @@ public class PercolationStats {
 
     // low endpoint of 95% confidence interval
     public double confidenceLow() {
-        return mean() - 1.96 * Math.pow(stddev(), 0.5) / Math.pow(T, 0.5);
+        return mean() - 1.96 * stddev() / Math.sqrt(T);
     }
 
     // high endpoint of 95% confidence interval
     public double confidenceHigh() {
-        return mean() + 1.96 * Math.pow(stddev(), 0.5) / Math.pow(T, 0.5);
+        return mean() + 1.96 * stddev() / Math.sqrt(T);
     }
 
-    public static void main(String[] args) {
-        PercolationFactory pf = new PercolationFactory();
-        PercolationStats ps = new PercolationStats(20, 30, pf);
-        System.out.println(ps.mean());
-        System.out.println(ps.confidenceHigh());
-        System.out.println(ps.confidenceLow());
-        
-    }
+//    public static void main(String[] args) {
+//        PercolationFactory pf = new PercolationFactory();
+//        PercolationStats ps = new PercolationStats(20, 30, pf);
+//        System.out.println(ps.mean());
+//        System.out.println(ps.stddev());
+//        System.out.println(ps.confidenceHigh());
+//        System.out.println(ps.confidenceLow());
+//
+//    }
 }

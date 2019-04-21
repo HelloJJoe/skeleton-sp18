@@ -1,8 +1,7 @@
 package hw2;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-import java.lang.IllegalArgumentException;
-import java.lang.IndexOutOfBoundsException;
+
 
 public class Percolation {
     // create N-by-N grid, with all sites initially blocked
@@ -37,7 +36,9 @@ public class Percolation {
         validate(row, col);
         int position = rsTo1D(row, col);
 
-        if (isOpen(position)) return;
+        if (isOpen(position)) {
+            return;
+        }
 
         openSite[position] = true;
         numberOfOpenSites++;
@@ -133,9 +134,9 @@ public class Percolation {
     // use for unit testing (not required)
     public static void main(String[] args) {
         Percolation per = new Percolation(3);
-        per.open(0,0);
-        per.open(0,1);
-        per.open(0,2);
+        per.open(0, 0);
+        per.open(0, 1);
+        per.open(0, 2);
         boolean test1 = per.isFull(0, 1);
         System.out.println(per.percolates());
         System.out.println(test1);
