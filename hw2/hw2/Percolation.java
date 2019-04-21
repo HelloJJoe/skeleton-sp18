@@ -9,6 +9,7 @@ public class Percolation {
     private int grid;
     private boolean[] openSite;
     private WeightedQuickUnionUF wqu;
+    private WeightedQuickUnionUF noBackWash;
     private int numberOfOpenSites;
     private int vTopSite;
     private int vBottomSite;
@@ -25,6 +26,7 @@ public class Percolation {
 
         // Initiate the wquuf with N * N sites, 1 virtual top site and 1 virtual bottom site.
         wqu = new WeightedQuickUnionUF(N * N + 2);
+        noBackWash = new WeightedQuickUnionUF(N * N + 1);
     }
 
     private int rsTo1D(int row, int col) {
@@ -45,6 +47,7 @@ public class Percolation {
         if (position < grid) {
             checkUnion(position, bottomOfPosition(position));
             wqu.union(position, vTopSite);
+            noBackWash.union(position, vTopSite);
             if (position == 0) {
                 checkUnion(position, rightOfPosition(position));
             } else if (position == grid - 1) {
@@ -100,6 +103,7 @@ public class Percolation {
     private void checkUnion(int position, int neighbor) {
         if (isOpen(neighbor)) {
             wqu.union(position, neighbor);
+            noBackWash.union(position, neighbor);
 
         }
     }
@@ -125,17 +129,18 @@ public class Percolation {
             throw new IndexOutOfBoundsException("arguments are out of bounds");
         }
         int position = rsTo1D(row, col);
-        // Method 2: high efficiency
 
-//        return wqu.connected(position, vTopSite);
+        // Method 2: high efficiency
+        return noBackWash.connected(position, vTopSite);
+
         // Method 1: low efficiency
-        if (isOpen(row, col) == false) return false;
-        for (int i = 0; i < grid; i++) {
-            if (isOpen(i) && wqu.connected(position, i)) {
-                return true;
-            }
-        }
-        return false;
+//        if (isOpen(row, col) == false) return false;
+//        for (int i = 0; i < grid; i++) {
+//            if (isOpen(i) && wqu.connected(position, i)) {
+//                return true;
+//            }
+//        }
+//        return false;
     }
 
     // number of open sites
@@ -146,21 +151,21 @@ public class Percolation {
     // does the system percolate?
     public boolean percolates() {
         // Method 2: high efficiency
-//        return wqu.connected(vTopSite, vBottomSite);
+        return wqu.connected(vTopSite, vBottomSite);
         // Method 1: low efficiency
-        boolean isPercolates = false;
-        if (numberOfOpenSites() < grid) {
-            return false;
-        }
-        for (int i = 0; i < grid; i++) {
-            for (int j = 0; j < grid; j++) {
-                isPercolates = wqu.connected(i, grid * (grid - 1) + j);
-                if (isPercolates) {
-                    return true;
-                }
-            }
-        }
-        return isPercolates;
+//        boolean isPercolates = false;
+//        if (numberOfOpenSites() < grid) {
+//            return false;
+//        }
+//        for (int i = 0; i < grid; i++) {
+//            for (int j = 0; j < grid; j++) {
+//                isPercolates = wqu.connected(i, grid * (grid - 1) + j);
+//                if (isPercolates) {
+//                    return true;
+//                }
+//            }
+//        }
+//        return isPercolates;
     }
 
     // use for unit testing (not required)
