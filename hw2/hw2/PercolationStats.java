@@ -8,7 +8,7 @@ public class PercolationStats {
     // perform T independent experiments on an N-by-N grid
     public PercolationStats(int N, int T, PercolationFactory pf) {
         if (N <= 0 || T <= 0) {
-            throw new IllegalArgumentException("N must be larger than zero and T must larger than 0");
+            throw new IllegalArgumentException("arguments out of rule");
         }
         this.T = T;
         int t = 0;
