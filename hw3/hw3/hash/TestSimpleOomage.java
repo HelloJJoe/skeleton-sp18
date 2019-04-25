@@ -30,7 +30,9 @@ public class TestSimpleOomage {
     public void testHashCodePerfect() {
         SimpleOomage ooA = new SimpleOomage(5, 10, 20);
         SimpleOomage ooB = new SimpleOomage(10, 5, 20);
+        SimpleOomage ooC = new SimpleOomage(10, 5, 20);
         assertTrue(ooA.hashCode() != ooB.hashCode());
+        assertTrue(ooB.hashCode() == ooC.hashCode());
     }
 
     @Test

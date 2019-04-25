@@ -89,12 +89,12 @@ public class ComplexOomage implements Oomage {
         ArrayList<Integer> params = new ArrayList<>(35);
         ArrayList<Integer> params1 = new ArrayList<>(35);
 
-        for (int j = 0; j < 3; j += 1) {
+        for (int j = 0; j < 32; j += 1) {
             params.add(StdRandom.uniform(0, 255));
             params1.add(StdRandom.uniform(0, 255));
 
         }
-        for (int i = 0; i < 32; i += 1) {
+        for (int i = 0; i < 3; i += 1) {
             params.add(33);
             params1.add(33);
         }

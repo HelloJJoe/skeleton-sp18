@@ -25,7 +25,7 @@ public class TestComplexOomage {
     @Test
     public void testRandomOomagesHashCodeSpread() {
         List<Oomage> oomages = new ArrayList<>();
-        int N = 10000;
+        int N = 100;
 
         for (int i = 0; i < N; i += 1) {
             oomages.add(ComplexOomage.randomComplexOomage());
@@ -33,7 +33,6 @@ public class TestComplexOomage {
 
         double scale = 1;
         int M = 10;
-        HashTableVisualizer.visualize(oomages, M, scale);
 
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 10));
     }
@@ -45,13 +44,14 @@ public class TestComplexOomage {
     @Test
     public void testWithDeadlyParams() {
         List<Oomage> deadlyList = new ArrayList<>();
-        int n = StdRandom.uniform(0, 10);
-        for (int i = 0; i < n; i++) {
-            ArrayList<Integer> param = new ArrayList<>(35);
-            for (int j = 0; j < 3; j++) {
+
+        int N = 35;
+        for (int i = 0; i < N; i++) {
+            ArrayList<Integer> param = new ArrayList<>(N);
+            for (int j = 0; j < 31; j++) {
                 param.add(StdRandom.uniform(0, 255));
             }
-            for (int k = 0; k < 32; k++) {
+            for (int k = 0; k < 4; k++) {
                 param.add(8);
             }
             ComplexOomage co = new ComplexOomage(param);
@@ -59,6 +59,7 @@ public class TestComplexOomage {
         }
 
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(deadlyList, 10));
+
     }
 
     /** Calls tests for SimpleOomage. */
