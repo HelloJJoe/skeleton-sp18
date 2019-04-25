@@ -24,8 +24,8 @@ public class SimpleOomage implements Oomage {
             return false;
         }
 
-        SimpleOomage toCompare = (SimpleOomage) o;
-        return (this.red == toCompare.red) && (this.blue == toCompare.blue) && (this.green == toCompare.green);
+        SimpleOomage toComp = (SimpleOomage) o;
+        return this.red == toComp.red && this.blue == toComp.blue && this.green == toComp.green;
     }
 
 //       Uncomment this method after you've written
@@ -39,7 +39,7 @@ public class SimpleOomage implements Oomage {
             this.red /= 5;
             this.blue /= 5;
             this.green /= 5;
-            return this.red * 31 * 31 + this.green * 31 + this.blue * 1;
+            return this.red * 257 * 257 + this.green * 257 + this.blue * 1;
         }
     }
 

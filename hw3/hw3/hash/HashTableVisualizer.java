@@ -19,16 +19,16 @@ public class HashTableVisualizer {
         int M = 100;
 
         HashTableDrawingUtility.setScale(scale);
+        List<Oomage> oomies = new ArrayList<>();
+        for (int i = 0; i < N; i += 1) {
+           oomies.add(SimpleOomage.randomSimpleOomage());
+        }
+
 //        List<Oomage> oomies = new ArrayList<>();
 //        for (int i = 0; i < N; i += 1) {
-//           oomies.add(SimpleOomage.randomSimpleOomage());
+//            oo.add(ComplexOomage.randomComplexOomage());
 //        }
-
-        List<Oomage> oo = new ArrayList<>();
-        for (int i = 0; i < N; i += 1) {
-            oo.add(ComplexOomage.randomComplexOomage());
-        }
-        visualize(oo, M, scale);
+        visualize(oomies, M, scale);
 
     }
 
