@@ -1,6 +1,7 @@
 package hw2;
 import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
+import edu.princeton.cs.introcs.Stopwatch;
 
 public class PercolationStats {
     private double[] thresholds;
@@ -49,13 +50,16 @@ public class PercolationStats {
         return mean() + 1.96 * stddev() / Math.sqrt(T);
     }
 
-//    public static void main(String[] args) {
-//        PercolationFactory pf = new PercolationFactory();
-//        PercolationStats ps = new PercolationStats(20, 30, pf);
-//        System.out.println(ps.mean());
-//        System.out.println(ps.stddev());
-//        System.out.println(ps.confidenceHigh());
-//        System.out.println(ps.confidenceLow());
-//
-//    }
+    public static void main(String[] args) {
+        int counter = 0;
+        int initN = 10;
+        while (counter < 30) {
+            PercolationFactory pf = new PercolationFactory();
+            PercolationStats ps = new PercolationStats(initN, 30, pf);
+            System.out.println(ps.stddev());
+            initN += 10;
+            counter ++;
+        }
+
+    }
 }

@@ -10,26 +10,38 @@ public class SimpleOomage implements Oomage {
     protected int blue;
 
     private static final double WIDTH = 0.01;
-    private static final boolean USE_PERFECT_HASH = false;
+    private static final boolean USE_PERFECT_HASH = true;
 
     @Override
     public boolean equals(Object o) {
-        // TODO: Write this method.
-        return false;
+        if (this == o) {
+            return true;
+        }
+        if (o.getClass() != this.getClass()) {
+            return false;
+        }
+        if (o == null) {
+            return false;
+        }
+
+        SimpleOomage toCompare = (SimpleOomage) o;
+        return (this.red == toCompare.red) && (this.blue == toCompare.blue) && (this.green == toCompare.green);
     }
 
-    /* Uncomment this method after you've written
-       equals and failed the testHashCodeAndEqualsConsistency
-       test.
+//       Uncomment this method after you've written
+//       equals and failed the testHashCodeAndEqualsConsistency
+//       test.
     @Override
     public int hashCode() {
         if (!USE_PERFECT_HASH) {
             return red + green + blue;
         } else {
-            // TODO: Write a perfect hash function for Simple Oomages.
-            return 0;
+            this.red /= 5;
+            this.blue /= 5;
+            this.green /= 5;
+            return this.red * 9 + this.blue * 3 + this.green * 1;
         }
-    }*/
+    }
 
     public SimpleOomage(int r, int g, int b) {
         if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
@@ -57,6 +69,10 @@ public class SimpleOomage implements Oomage {
     }
 
     public static void main(String[] args) {
+//        SimpleOomage ooA = randomSimpleOomage();
+//        SimpleOomage ooB = randomSimpleOomage();
+//
+//        ooA.equals(ooB);
         System.out.println("Drawing 4 random simple Oomages.");
         randomSimpleOomage().draw(0.25, 0.25, 1);
         randomSimpleOomage().draw(0.75, 0.75, 1);
