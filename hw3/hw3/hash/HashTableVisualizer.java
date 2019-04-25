@@ -15,13 +15,13 @@ public class HashTableVisualizer {
            scale = 0.5, N = 2000, M = 100. */
 
         double scale = 0.5;
-        int N = 2000;
-        int M = 100;
+        int N = 100;
+        int M = 8;
 
         HashTableDrawingUtility.setScale(scale);
         List<Oomage> oomies = new ArrayList<>();
         for (int i = 0; i < N; i += 1) {
-           oomies.add(SimpleOomage.randomSimpleOomage());
+            oomies.add(SimpleOomage.randomSimpleOomage());
         }
 
 //        List<Oomage> oomies = new ArrayList<>();

@@ -39,7 +39,7 @@ public class SimpleOomage implements Oomage {
             this.red /= 5;
             this.blue /= 5;
             this.green /= 5;
-            return this.red * 257 * 257 + this.green * 257 + this.blue * 1;
+            return this.red * 256 * 256 + this.green * 256 + this.blue * 1;
         }
     }
 
