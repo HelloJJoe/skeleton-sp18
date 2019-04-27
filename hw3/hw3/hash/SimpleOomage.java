@@ -24,8 +24,8 @@ public class SimpleOomage implements Oomage {
             return false;
         }
 
-        SimpleOomage toCompare = (SimpleOomage) o;
-        return (this.red == toCompare.red) && (this.blue == toCompare.blue) && (this.green == toCompare.green);
+        SimpleOomage toComp = (SimpleOomage) o;
+        return this.red == toComp.red && this.blue == toComp.blue && this.green == toComp.green;
     }
 
 //       Uncomment this method after you've written
@@ -36,10 +36,8 @@ public class SimpleOomage implements Oomage {
         if (!USE_PERFECT_HASH) {
             return red + green + blue;
         } else {
-            this.red /= 5;
-            this.blue /= 5;
-            this.green /= 5;
-            return this.red * 31 * 31 + this.green * 31 + this.blue * 1;
+
+            return red / 5 * 256 * 256 + green / 5 * 256 + blue / 5 * 1;
         }
     }
 
@@ -69,15 +67,15 @@ public class SimpleOomage implements Oomage {
     }
 
     public static void main(String[] args) {
-//        SimpleOomage ooA = randomSimpleOomage();
-//        SimpleOomage ooB = randomSimpleOomage();
-//
+        SimpleOomage ooA = randomSimpleOomage();
+        SimpleOomage ooB = randomSimpleOomage();
+        ooA.hashCode();
 //        ooA.equals(ooB);
-        System.out.println("Drawing 4 random simple Oomages.");
-        randomSimpleOomage().draw(0.25, 0.25, 1);
-        randomSimpleOomage().draw(0.75, 0.75, 1);
-        randomSimpleOomage().draw(0.25, 0.75, 1);
-        randomSimpleOomage().draw(0.75, 0.25, 1);
+//        System.out.println("Drawing 4 random simple Oomages.");
+//        randomSimpleOomage().draw(0.25, 0.25, 1);
+//        randomSimpleOomage().draw(0.75, 0.75, 1);
+//        randomSimpleOomage().draw(0.25, 0.75, 1);
+//        randomSimpleOomage().draw(0.75, 0.25, 1);
     }
 
     public String toString() {
