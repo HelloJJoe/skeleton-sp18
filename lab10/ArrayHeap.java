@@ -114,6 +114,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             swap(index, parentIndex(index));
             swim(parentIndex);
         }
+        return;
 
     }
 
@@ -190,12 +191,16 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T removeMin() {
+
         Node toReturnNode = contents[1];
         T toReturn = toReturnNode.item();
         swap(1, size);
         contents[size] = null;
         size --;
-        sink(1);
+
+        if (size > 0) {
+            sink(1);
+        }
         return toReturn;
     }
 
@@ -460,6 +465,39 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         }
     }
 
+    @Test
+    public void testIncreasingPriority(){
+        ArrayHeap<String> pq = new ArrayHeap<>();
+        pq.insert("c", 0);
+        pq.insert("i", 1);
+        pq.insert("g", 2);
+        pq.insert("d", 3);
+        pq.insert("a", 4);
+        pq.insert("h", 5);
+        pq.insert("e", 6);
+        pq.insert("b", 7);
+        pq.insert("c", 8);
+        pq.insert("d", 9);
+        pq.insert("d", 10);
+        pq.insert("d", 11);
+        pq.insert("q", 12);
+        pq.insert("w", 13);
+        pq.insert("y", 14);
+        pq.insert("e", 15);
+        pq.insert("g", 16);
+        pq.insert("z", 17);
+
+        assertEquals("c", pq.removeMin());
+        assertEquals("i", pq.removeMin());
+        assertEquals("g", pq.removeMin());
+
+        pq.changePriority("z", 0);
+        assertEquals("z", pq.removeMin());
+
+
+
+    }
+
     public static void main(String[] args) {
         ExtrinsicPQ<String> pq = new ArrayHeap<>();
         pq.insert("c", 3);
@@ -471,7 +509,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         pq.insert("e", 5);
         pq.insert("b", 2);
 
-        pq.changePriority("b", 5);
+        pq.changePriority("i", 0);
 
     }
 
