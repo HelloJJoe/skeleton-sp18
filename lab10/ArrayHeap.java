@@ -108,10 +108,8 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         Node parentNode = contents[parentIndex(index)];
         int parentIndex = parentIndex(index);
 
-        if (parentIndex == 0) {
-            return;
-        } else if (node.myPriority < parentNode.myPriority) {
-            swap(index, parentIndex(index));
+        if (index > 1 && node.myPriority < parentNode.myPriority) {
+            swap(index, parentIndex);
             swim(parentIndex);
         }
         return;
