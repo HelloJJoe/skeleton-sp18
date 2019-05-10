@@ -1,61 +1,70 @@
 package hw4.puzzle;
 import edu.princeton.cs.algs4.MinPQ;
 
-import java.util.*;
+import java.util.Stack;
 
 public class Solver {
 
     private MinPQ<SearchNode> fringe;
-    private SearchNode initialState;
-    private Queue<WorldState> solution;
-    private int moveMadeSoFar;
+    private Stack<WorldState> solution;
 
-    private class SearchNode {
+    private class SearchNode implements Comparable<SearchNode>{
+
         private WorldState state;
-        private int dist;
+        private int moveSoFar;
         private SearchNode prev;
+        private int priority;
 
-        private SearchNode(WorldState state, int dist, SearchNode prev) {
+        private SearchNode(WorldState state, int moveSoFar, SearchNode prev) {
             this.state = state;
-            this.dist = dist;
+            this.moveSoFar = moveSoFar;
             this.prev = prev;
+            priority = moveSoFar + state.estimatedDistanceToGoal();
         }
+
+        public int compareTo(SearchNode o) {
+            return this.priority - o.priority;
+        }
+
     }
 
     public Solver(WorldState initial) {
-        initialState = new SearchNode(initial, 0, null);
 
-        Comparator c = new Comparator<SearchNode>() {
-            @Override
-            public int compare (SearchNode a, SearchNode b) {
-                return a.dist - b.dist;
-            }
-        };
 
-        fringe = new MinPQ<>(c);
-        fringe.insert(initialState);
-        moveMadeSoFar = 0;
-        solution = new LinkedList<>();
+        fringe = new MinPQ<>();
+        fringe.insert(new SearchNode(initial, 0, null));
+
+        solution = new Stack<>();
+        SearchNode goal = null;
 
         while (!fringe.isEmpty()) {
             SearchNode min = fringe.delMin();
-            solution.add(min.state);
+
             if (min.state.isGoal()) {
-                return;
+                goal = min;
+                break;
             } else {
                 for (WorldState state : min.state.neighbors()) {
-                    moveMadeSoFar += 1;
-                    int dist = moveMadeSoFar + state.estimatedDistanceToGoal();
-                    SearchNode neighborNode = new SearchNode(state, dist, min);
-                    fringe.insert(neighborNode);
+                    if (min.prev == null || !min.prev.state.equals(state)) {
+
+                        SearchNode neighborNode = new SearchNode(state, min.moveSoFar + 1, min);
+                        fringe.insert(neighborNode);
+                    }
                 }
             }
         }
 
+        while (goal != null) {
+            solution.add(goal.state);
+            goal = goal.prev;
+        }
+
     }
 
+
+
     public int moves() {
-        return moveMadeSoFar;
+        return solution.size() - 1;
     }
 
     public Iterable<WorldState> solution() {
