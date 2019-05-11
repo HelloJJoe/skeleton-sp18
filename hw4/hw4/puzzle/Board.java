@@ -1,6 +1,4 @@
 package hw4.puzzle;
-
-import edu.princeton.cs.algs4.StdOut;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -51,7 +49,7 @@ public class Board implements WorldState {
     }
 
     public int tileAt(int r, int c) {
-        if (c < 0 || c > size || r < 0 || r > size){
+        if (c < 0 || c > size || r < 0 || r > size) {
             throw new java.lang.IndexOutOfBoundsException();
         }
         return start[r][c];
@@ -124,7 +122,7 @@ public class Board implements WorldState {
         if (y == this) {
             return true;
         }
-        if (y == null || y.getClass() != this.getClass()){
+        if (y == null || y.getClass() != this.getClass()) {
             return false;
         }
 
@@ -135,11 +133,18 @@ public class Board implements WorldState {
         boolean flag = true;
         for (int r = 0; r < this.size; r++) {
             for (int c = 0; c < this.size; c++) {
-                if(!flag) return false;
+                if (!flag) {
+                    return false;
+                }
                 flag = (board.tileAt(r, c) == this.tileAt(r, c));
             }
         }
         return flag;
     }
-
+    public int hashCode() {
+        int result = start != null ? start.hashCode() : null;
+        result = 31 * result + (goal != null ? goal.hashCode() : null);
+        return result;
+    }
 }
+

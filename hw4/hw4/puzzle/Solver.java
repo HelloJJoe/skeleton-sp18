@@ -1,10 +1,6 @@
 package hw4.puzzle;
 import edu.princeton.cs.algs4.MinPQ;
-
 import java.util.ArrayDeque;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Queue;
 import java.util.Deque;
 
 public class Solver {
@@ -12,7 +8,7 @@ public class Solver {
     private MinPQ<SearchNode> fringe;
     private Deque<WorldState> solution;
 
-    private class SearchNode implements Comparable<SearchNode>{
+    private class SearchNode implements Comparable<SearchNode> {
 
         private WorldState state;
         private int moveSoFar;
