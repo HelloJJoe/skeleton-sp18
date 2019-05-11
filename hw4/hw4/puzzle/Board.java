@@ -132,18 +132,14 @@ public class Board implements WorldState {
         if (board.size() != this.size()) {
             return false;
         }
-        boolean tag = true;
-
+        boolean flag = true;
         for (int r = 0; r < this.size; r++) {
             for (int c = 0; c < this.size; c++) {
-                if(!tag) return false;
-                tag = (board.tileAt(r, c) == this.tileAt(r, c));
+                if(!flag) return false;
+                flag = (board.tileAt(r, c) == this.tileAt(r, c));
             }
         }
-        return tag;
-
-
-
+        return flag;
     }
 
 }

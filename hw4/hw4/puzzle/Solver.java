@@ -1,12 +1,16 @@
 package hw4.puzzle;
 import edu.princeton.cs.algs4.MinPQ;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.Deque;
 
 public class Solver {
 
     private MinPQ<SearchNode> fringe;
-    private Stack<WorldState> solution;
+    private Deque<WorldState> solution;
 
     private class SearchNode implements Comparable<SearchNode>{
 
@@ -34,7 +38,7 @@ public class Solver {
         fringe = new MinPQ<>();
         fringe.insert(new SearchNode(initial, 0, null));
 
-        solution = new Stack<>();
+        solution = new ArrayDeque<>();
         SearchNode goal = null;
 
         while (!fringe.isEmpty()) {
@@ -55,7 +59,7 @@ public class Solver {
         }
 
         while (goal != null) {
-            solution.add(goal.state);
+            solution.addFirst(goal.state);
             goal = goal.prev;
         }
 
@@ -68,6 +72,7 @@ public class Solver {
     }
 
     public Iterable<WorldState> solution() {
+
         return solution;
     }
 }
