@@ -125,10 +125,7 @@ public class Board implements WorldState {
         if (y == null || y.getClass() != this.getClass()) {
             return false;
         }
-        if (this.equals(y)) {
-            return true;
-        }
-
+        
         Board board = (Board) y;
         if (board.size() != this.size()) {
             return false;
