@@ -18,7 +18,7 @@ public class Board implements WorldState {
         s.append(N + "\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                s.append(String.format("%2d ", tileAt(i,j)));
+                s.append(String.format("%2d ", tileAt(i, j)));
             }
             s.append("\n");
         }
@@ -124,6 +124,9 @@ public class Board implements WorldState {
         }
         if (y == null || y.getClass() != this.getClass()) {
             return false;
+        }
+        if (this.equals(y)) {
+            return true;
         }
 
         Board board = (Board) y;
