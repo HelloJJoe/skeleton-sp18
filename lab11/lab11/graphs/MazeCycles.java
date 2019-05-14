@@ -21,7 +21,7 @@ public class MazeCycles extends MazeExplorer {
 
     }
 
-    //
+    // Perform a cycle check from vertex v
     private void cc(int v) {
         marked[v] = true;
         announce();
