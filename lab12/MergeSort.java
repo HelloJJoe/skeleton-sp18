@@ -70,7 +70,7 @@ public class MergeSort {
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(Queue<Item> items) {
-        if (items.size() == 0) {
+        if (items.size() == 0 || items.size() == 1) {
             return items;
         }
 
