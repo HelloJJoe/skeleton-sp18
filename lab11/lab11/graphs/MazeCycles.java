@@ -40,7 +40,6 @@ public class MazeCycles extends MazeExplorer {
                 while (nei != start) {
                     edgeTo[start] = parent[start];
                     start = parent[start];
-                    announce();
                 }
                 edgeTo[start] = parent[start];
                 announce();
@@ -50,16 +49,12 @@ public class MazeCycles extends MazeExplorer {
             if (targetFound) {
                 return;
             }
-
         }
-
     }
 
     @Override
     public void solve() {
         cc(s);
     }
-
-    // Helper methods go here
 }
 

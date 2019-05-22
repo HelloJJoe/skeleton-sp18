@@ -1,8 +1,4 @@
 package lab11.graphs;
-
-import edu.princeton.cs.algs4.MinPQ;
-
-import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -61,10 +57,7 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
                 }
             }
         }
-
-
     }
-
 
     @Override
     public void solve() {

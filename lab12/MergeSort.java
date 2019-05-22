@@ -37,9 +37,9 @@ public class MergeSort {
 
         Queue<Queue<Item>> toReturn = new Queue<>();
 
-        while (!items.isEmpty()) {
+        for (Item item : items) {
             Queue<Item> inputQueue = new Queue<>();
-            inputQueue.enqueue(items.dequeue());
+            inputQueue.enqueue(item);
             toReturn.enqueue(inputQueue);
         }
 
@@ -75,17 +75,15 @@ public class MergeSort {
         }
 
         Queue<Queue <Item>> toReturnQueues =  makeSingleItemQueues(items);
-//        while (toReturnQueues.size() != 1) {
-//            Queue<Item> q1 = toReturnQueues.dequeue();
-//            Queue<Item> q2 = toReturnQueues.dequeue();
-//            Queue<Item> merge = mergeSortedQueues(q1, q2);
-//            toReturnQueues.enqueue(merge);
-//        }
-        Queue<Item> toReturn = new Queue<>();
-        for (Queue item: toReturnQueues) {
-            toReturn = mergeSortedQueues(toReturn, toReturnQueues.dequeue());
+
+        while (toReturnQueues.size() != 1) {
+            Queue<Item> q1 = toReturnQueues.dequeue();
+            Queue<Item> q2 = toReturnQueues.dequeue();
+            Queue<Item> merge = mergeSortedQueues(q1, q2);
+            toReturnQueues.enqueue(merge);
         }
-        return toReturn;
+
+        return toReturnQueues.dequeue();
     }
 
     public static void main(String[] args) {
@@ -103,7 +101,9 @@ public class MergeSort {
         }
         System.out.println();
         System.out.println("Sorted Queue:");
+
         Queue<String> sortedStudents = MergeSort.mergeSort(students);
+
         while (!sortedStudents.isEmpty()) {
             System.out.println(sortedStudents.dequeue());
         }
