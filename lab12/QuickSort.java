@@ -46,13 +46,59 @@ public class QuickSort {
      */
     private static <Item extends Comparable> void partition(Queue<Item> unsorted, Item pivot,
             Queue<Item> less, Queue<Item> equal, Queue<Item> greater) {
-        // Your code here!
+        for (Item usr : unsorted) {
+            if (usr.compareTo(pivot) < 0) {
+                less.enqueue(usr);
+            } else if (usr.compareTo(pivot) == 0) {
+                equal.enqueue(usr);
+            } else {
+                greater.enqueue(usr);
+            }
+        }
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
-    public static <Item extends Comparable> Queue<Item> quickSort(
-            Queue<Item> items) {
-        // Your code here!
-        return items;
+    public static <Item extends Comparable> Queue<Item> quickSort(Queue<Item> items) {
+        if (items.size() == 1 || items.size() == 0) {
+            return items;
+        }
+
+        Queue<Item> less = new Queue<>();
+        Queue<Item> equal = new Queue<>();
+        Queue<Item> greater = new Queue<>();
+
+        partition(items, getRandomItem(items), less, equal, greater);
+        less = quickSort(less);
+        greater = quickSort(greater);
+
+        Queue<Item> toReturn = catenate(less, equal);
+        toReturn = catenate(toReturn, greater);
+
+        return toReturn;
+    }
+
+    public static void main(String[] args) {
+        Queue<String> unsorted = new Queue<>();
+
+        unsorted.enqueue("Xavier");
+        unsorted.enqueue("Alice");
+        unsorted.enqueue("Joe");
+        unsorted.enqueue("Gary");
+        unsorted.enqueue("Vanessa");
+        unsorted.enqueue("Ethan");
+
+
+        System.out.println("Unsorted Queue:");
+        for (String ust : unsorted) {
+            System.out.println(ust);
+        }
+
+        System.out.println();
+        System.out.println("Sorted Queue:");
+
+        Queue<String> sorted = QuickSort.quickSort(unsorted);
+        while (!sorted.isEmpty()) {
+            System.out.println(sorted.dequeue());
+        }
     }
 }

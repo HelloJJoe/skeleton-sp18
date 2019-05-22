@@ -85,6 +85,22 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        
+        Queue<String> students = new Queue<>();
+        students.enqueue("Xavier");
+        students.enqueue("Alice");
+        students.enqueue("Joe");
+        students.enqueue("Gary");
+        students.enqueue("Vanessa");
+        students.enqueue("Ethan");
+        System.out.println("Unsorted Queue:");
+        for (String std : students) {
+            System.out.println(std);
+        }
+        System.out.println();
+        System.out.println("Sorted Queue:");
+        Queue<String> sortedStudents = MergeSort.mergeSort(students);
+        while (!sortedStudents.isEmpty()) {
+            System.out.println(sortedStudents.dequeue());
+        }
     }
 }
