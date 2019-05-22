@@ -75,13 +75,17 @@ public class MergeSort {
         }
 
         Queue<Queue <Item>> toReturnQueues =  makeSingleItemQueues(items);
-        while (toReturnQueues.size() != 1) {
-            Queue<Item> q1 = toReturnQueues.dequeue();
-            Queue<Item> q2 = toReturnQueues.dequeue();
-            Queue<Item> merge = mergeSortedQueues(q1, q2);
-            toReturnQueues.enqueue(merge);
+//        while (toReturnQueues.size() != 1) {
+//            Queue<Item> q1 = toReturnQueues.dequeue();
+//            Queue<Item> q2 = toReturnQueues.dequeue();
+//            Queue<Item> merge = mergeSortedQueues(q1, q2);
+//            toReturnQueues.enqueue(merge);
+//        }
+        Queue<Item> toReturn = new Queue<>();
+        for (Queue item: toReturnQueues) {
+            toReturn = mergeSortedQueues(toReturn, toReturnQueues.dequeue());
         }
-        return toReturnQueues.dequeue();
+        return toReturn;
     }
 
     public static void main(String[] args) {
@@ -92,6 +96,7 @@ public class MergeSort {
         students.enqueue("Gary");
         students.enqueue("Vanessa");
         students.enqueue("Ethan");
+
         System.out.println("Unsorted Queue:");
         for (String std : students) {
             System.out.println(std);
