@@ -44,8 +44,7 @@ public class QuickSort {
      * @param greater   An empty Queue. When the function completes, this queue will contain
      *                  all of the items in unsorted that are greater than the given pivot.
      */
-    private static <Item extends Comparable> void partition(
-            Queue<Item> unsorted, Item pivot,
+    private static <Item extends Comparable> void partition(Queue<Item> unsorted, Item pivot,
             Queue<Item> less, Queue<Item> equal, Queue<Item> greater) {
         // Your code here!
     }
